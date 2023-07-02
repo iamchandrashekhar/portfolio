@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:portfolio/theme/theme_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+class Social extends StatelessWidget {
+  const Social({super.key, required this.svgPath});
+  final String svgPath;
+  @override
+  Widget build(BuildContext context) {
+    bool isLightMode = !context.read<ThemeManager>().isDark();
+    final theme = Theme.of(context);
+    return Container(
+      width: 80,
+      height: 80,
+      padding: EdgeInsets.all(defaultPadding),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: theme.colorScheme.onBackground,
+          borderRadius: BorderRadius.all(
+            Radius.circular(defaultRadius),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: socialBgDark,
+                blurRadius: 15,
+                offset: const Offset(4, 4),
+                spreadRadius: 1),
+            if (isLightMode)
+              BoxShadow(
+                  color: socialBgLight,
+                  blurRadius: 15,
+                  offset: const Offset(-4, -4),
+                  spreadRadius: 1),
+          ]),
+      child: SvgPicture.asset(
+        svgPath,
+        colorFilter: ColorFilter.mode(
+            theme.textTheme.bodyLarge!.color!, BlendMode.srcATop),
+      ),
+    );
+  }
+}

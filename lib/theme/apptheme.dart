@@ -24,17 +24,19 @@ ColorScheme getColorScheme({required bool isLightTheme}) {
           primary: bgLightColor,
           background: bgLightColor,
           secondary: redColor,
+          onBackground: socialBgLight,
         )
       : ColorScheme.dark(
           primary: bgDarkColor,
           background: bgDarkColor,
           secondary: redColor,
+          onBackground: socialBgDark,
         );
 }
 
 TextTheme getTextTheme({required bool isLightTheme}) {
   final color = isLightTheme ? textLightColor : textDarkColor;
-  return GoogleFonts.notoSansTextTheme(TextTheme(
+  return GoogleFonts.openSansTextTheme(TextTheme(
     displayLarge: TextStyle(color: color),
     displayMedium: TextStyle(color: color),
     displaySmall: TextStyle(color: color),

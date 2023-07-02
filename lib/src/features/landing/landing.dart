@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/features/contact/contact.dart';
-import 'package:portfolio/src/features/homepage/homepage.dart';
 import 'package:portfolio/src/features/landing/headers.dart';
-import 'package:portfolio/src/features/projects/project.dart';
-import 'package:portfolio/src/features/skiils/skills.dart';
+import 'package:portfolio/src/features/landing/theme_toggle.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
+import 'package:portfolio/src/utils/responsive.dart';
+import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -15,15 +14,11 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _LandingPageState extends State<LandingPage>
+    with SingleTickerProviderStateMixin {
   PageController pageController = PageController(initialPage: 0);
 
-  List<Widget> pages = [
-    const HomePage(),
-    const Projects(),
-    const Skills(),
-    const Contact()
-  ];
+  final pages = AppValue.pages;
 
   @override
   void dispose() {
@@ -39,39 +34,46 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   void updateIndex() {
-    context
-        .read<LandingProvider>()
-        .updateHeaderIndex((pageController.page ?? 0).toInt());
+    double page = (pageController.page ?? 0);
+    int p = page.toInt();
+    if (page - p > 0.8) {
+      p++;
+    }
+    context.read<LandingProvider>().updateHeaderIndex(p);
   }
 
   @override
   Widget build(BuildContext context) {
+    setContext(context);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: _title(context),
-          actions: [
-            GestureDetector(
-                onTap: () {
-                  context.read<ThemeManager>().toggleTheme();
+        appBar: responsive<PreferredSizeWidget?>(
+          null,
+          null,
+          AppBar(
+            title: _title(context),
+            actions: [
+              Header(
+                horizontal: true,
+                onTap: (index) {
+                  pageController.animateToPage(index,
+                      duration: fast, curve: Curves.easeInOut);
                 },
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text("Toggle Theme"),
-                )),
-            HeaderMenu(
-              onTap: (index) {
-                pageController.animateToPage(index,
-                    duration: fast, curve: Curves.easeInOut);
-              },
-            ),
-          ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: defaultPadding),
+                child: const ThemeToggle(),
+              ),
+            ],
+          ),
         ),
+        bottomNavigationBar:
+            responsive<Widget?>(_bottomNavigation(), _bottomNavigation(), null),
         body: PageView.builder(
           controller: pageController,
           pageSnapping: false,
           scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => pages[index],
+          itemBuilder: (context, index) => pages[index].widget,
           itemCount: pages.length,
         ),
       ),
@@ -80,19 +82,43 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget _title(BuildContext cxt) {
     final txt = Theme.of(cxt).textTheme;
-    return RichText(
-      text: TextSpan(
-        children: const [
-          TextSpan(
-            text: "CHANDRASHEKHAR ",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          TextSpan(
-            text: "PANWAR",
-          ),
-        ],
-        style: txt.titleMedium,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+      child: RichText(
+        text: TextSpan(
+          children: const [
+            TextSpan(
+              text: "CHANDRASHEKHAR ",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(
+              text: "PANWAR",
+            ),
+          ],
+          style: txt.titleLarge,
+        ),
       ),
+    );
+  }
+
+  Widget _bottomNavigation() {
+    return SizedBox(
+      height: kToolbarHeight,
+      child: Row(children: [
+        _title(context),
+        const Spacer(),
+        Padding(
+          padding: EdgeInsets.only(right: defaultPadding),
+          child: const ThemeToggle(),
+        ),
+        Header(
+          horizontal: false,
+          onTap: (index) {
+            pageController.animateToPage(index,
+                duration: fast, curve: Curves.easeInOut);
+          },
+        )
+      ]),
     );
   }
 }

@@ -6,13 +6,15 @@ bool material3 = true;
 
 // Colors
 
-Color bgLightColor = const Color(0xFFFFFFFF);
+Color bgLightColor = const Color(0xFFE0E0E0);
 Color bgDarkColor = const Color(0xFF2D2D32);
 
 Color redColor = const Color(0xFFD54646);
 Color textLightColor = Colors.black;
 Color textDarkColor = Colors.white;
-
+Color textGrey = const Color(0xB0FFFFFF);
+Color socialBgLight = const Color(0xffffffff);
+Color socialBgDark = const Color(0xff252323);
 // Duration
 
 Duration fast = const Duration(milliseconds: 200);
