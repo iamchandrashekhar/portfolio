@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:provider/provider.dart';
-import 'package:portfolio/src/features/landing/landing.dart';
+import 'package:portfolio/src/screens/landing/landing.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 
 void main() {

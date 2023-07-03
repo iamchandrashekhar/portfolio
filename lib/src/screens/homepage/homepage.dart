@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/screen_size.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
-import 'package:portfolio/src/features/homepage/socials.dart';
+import 'package:portfolio/src/screens/homepage/socials.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';

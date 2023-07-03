@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/features/landing/headers.dart';
-import 'package:portfolio/src/features/landing/theme_toggle.dart';
+import 'package:portfolio/src/screens/landing/headers.dart';
+import 'package:portfolio/src/screens/landing/theme_toggle.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';

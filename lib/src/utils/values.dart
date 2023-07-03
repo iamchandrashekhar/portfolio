@@ -1,7 +1,7 @@
-import 'package:portfolio/src/features/contact/contact.dart';
-import 'package:portfolio/src/features/homepage/homepage.dart';
-import 'package:portfolio/src/features/projects/project.dart';
-import 'package:portfolio/src/features/skiils/skills.dart';
+import 'package:portfolio/src/screens/contact/contact.dart';
+import 'package:portfolio/src/screens/homepage/homepage.dart';
+import 'package:portfolio/src/screens/projects/project.dart';
+import 'package:portfolio/src/screens/skiils/skills.dart';
 import 'package:portfolio/src/models/page_model.dart';
 import 'package:portfolio/src/models/social_model.dart';
 
