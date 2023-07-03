@@ -104,21 +104,22 @@ class _LandingPageState extends State<LandingPage>
   Widget _bottomNavigation() {
     return SizedBox(
       height: kToolbarHeight,
-      child: Row(children: [
-        _title(context),
-        const Spacer(),
-        Padding(
-          padding: EdgeInsets.only(right: defaultPadding),
-          child: const ThemeToggle(),
-        ),
-        Header(
-          horizontal: false,
-          onTap: (index) {
-            pageController.animateToPage(index,
-                duration: fast, curve: Curves.easeInOut);
-          },
-        )
-      ]),
+      child: Row(
+        children: [
+          Expanded(child: _title(context)),
+          Padding(
+            padding: EdgeInsets.only(right: defaultPadding),
+            child: const ThemeToggle(),
+          ),
+          Header(
+            horizontal: false,
+            onTap: (index) {
+              pageController.animateToPage(index,
+                  duration: fast, curve: Curves.easeInOut);
+            },
+          )
+        ],
+      ),
     );
   }
 }

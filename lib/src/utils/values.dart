@@ -33,4 +33,9 @@ class AppValue {
     SocialModel(
         svgPath: "assets/images/socials/telegram.svg", link: "telegram"),
   ];
+
+  static String hello = "Hello,\nI'm Chandrashekhar";
+  static String designation = "DevOps Engineer";
+  static String about =
+      "Hiring prioritize lift sexy productive ocean bake stand. Knowledge three is harvest 4-blocker can't or. Eco-system minimize cadence also buy-in. Open nail invite nail dive. Meat angel say both conversation conversation closer teeth usabiltiy.";
 }
