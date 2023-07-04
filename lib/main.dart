@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
-import 'package:portfolio/src/utils/responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/src/screens/landing/landing.dart';
 import 'package:portfolio/theme/theme_widget.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: ((context) => ThemeManager())),
     ChangeNotifierProvider(create: ((context) => LandingProvider())),
-    // ChangeNotifierProvider(create: ((context) => ResponsiveProvider())),
   ], child: const MyApp()));
 }
 
@@ -20,17 +19,16 @@ class MyApp extends StatelessWidget {
     return Selector<ThemeManager, ThemeMode>(
       selector: (_, theme) => theme.themeMode,
       builder: (context, themeMode, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Chandrashekhar's Portfolio",
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: themeMode,
-          home: LayoutBuilder(builder: (context, constraints) {
-            initCurrentDevice(constraints.maxWidth);
-            return const LandingPage();
-          }),
-        );
+        return ResponsiveSizer(builder: (context, orientation, screenType) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Chandrashekhar's Portfolio",
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeMode,
+            home: const LandingPage(),
+          );
+        });
       },
     );
   }

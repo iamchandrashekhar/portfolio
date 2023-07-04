@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/common_widgets/screen_size.dart';
+import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/homepage/socials.dart';
-import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 
@@ -13,32 +12,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
-    List<String> socials = [
-      "assets/images/socials/github.svg",
-      "assets/images/socials/email.svg",
-      "assets/images/socials/linkedin.svg",
-      "assets/images/socials/telegram.svg"
-    ];
-    return SizedBox(
-      width: screenWidth(),
-      child: responsive<Widget>(
-        mobileAndTablet(txt),
-        mobileAndTablet(txt),
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: introList(textAlign: TextAlign.left, txt: txt),
-                ),
+    return ResponsiveWidget(
+      mobile: const MobileAndTablet(),
+      tablet: const MobileAndTablet(),
+      desktop: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: introList(textAlign: TextAlign.left, txt: txt),
               ),
             ),
-            const Expanded(child: Column())
-          ],
-        ),
+          ),
+          const Expanded(child: Column())
+        ],
       ),
     );
   }
@@ -80,18 +70,26 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
   ];
 }
 
-Widget mobileAndTablet(TextTheme txt) {
-  return Column(
-    children: [
-      heightBox(defaultPadding * 3),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: introList(textAlign: TextAlign.center, txt: txt),
+class MobileAndTablet extends StatelessWidget {
+  const MobileAndTablet({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final txt = Theme.of(context).textTheme;
+    return Column(
+      children: [
+        heightBox(defaultPadding * 3),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: introList(textAlign: TextAlign.center, txt: txt),
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }

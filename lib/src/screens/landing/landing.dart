@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:portfolio/src/common_widgets/responsive_widget.dart';
+import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/screens/landing/headers.dart';
 import 'package:portfolio/src/screens/landing/theme_toggle.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
-import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -19,6 +21,7 @@ class _LandingPageState extends State<LandingPage>
   PageController pageController = PageController(initialPage: 0);
 
   final pages = AppValue.pages;
+  Device? device;
 
   @override
   void dispose() {
@@ -42,33 +45,38 @@ class _LandingPageState extends State<LandingPage>
     context.read<LandingProvider>().updateHeaderIndex(p);
   }
 
+  void onTap(int index) {
+    pageController.animateToPage(index,
+        duration: fast, curve: Curves.easeInOut);
+  }
+
   @override
   Widget build(BuildContext context) {
     setContext(context);
     return SafeArea(
       child: Scaffold(
-        appBar: responsive<PreferredSizeWidget?>(
-          null,
-          null,
-          AppBar(
-            title: _title(context),
-            actions: [
-              Header(
-                horizontal: true,
-                onTap: (index) {
-                  pageController.animateToPage(index,
-                      duration: fast, curve: Curves.easeInOut);
-                },
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: defaultPadding),
-                child: const ThemeToggle(),
-              ),
-            ],
-          ),
+        appBar: isDesktop(MediaQuery.of(context).size.width)
+            ? AppBar(
+                title: const TitleWidget(),
+                actions: [
+                  Header(
+                    horizontal: true,
+                    onTap: (index) {
+                      pageController.animateToPage(index,
+                          duration: fast, curve: Curves.easeInOut);
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: defaultPadding),
+                    child: const ThemeToggle(),
+                  ),
+                ],
+              )
+            : null,
+        bottomNavigationBar: ResponsiveWidget(
+          tablet: BottomNavigation(onTap: onTap),
+          mobile: BottomNavigation(onTap: onTap),
         ),
-        bottomNavigationBar:
-            responsive<Widget?>(_bottomNavigation(), _bottomNavigation(), null),
         body: PageView.builder(
           controller: pageController,
           pageSnapping: false,
@@ -79,9 +87,14 @@ class _LandingPageState extends State<LandingPage>
       ),
     );
   }
+}
 
-  Widget _title(BuildContext cxt) {
-    final txt = Theme.of(cxt).textTheme;
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final txt = Theme.of(context).textTheme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: defaultPadding),
       child: RichText(
@@ -100,23 +113,35 @@ class _LandingPageState extends State<LandingPage>
       ),
     );
   }
+}
 
-  Widget _bottomNavigation() {
+class BottomNavigation extends StatelessWidget {
+  const BottomNavigation({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+  final ValueSetter<int> onTap;
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: kToolbarHeight,
       child: Row(
         children: [
-          Expanded(child: _title(context)),
+          const Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: TitleWidget(),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.only(right: defaultPadding),
             child: const ThemeToggle(),
           ),
           Header(
             horizontal: false,
-            onTap: (index) {
-              pageController.animateToPage(index,
-                  duration: fast, curve: Curves.easeInOut);
-            },
+            onTap: onTap,
           )
         ],
       ),
