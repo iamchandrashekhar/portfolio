@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
+import 'package:portfolio/src/models/page_model.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
@@ -31,7 +32,6 @@ class _Horizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final pages = AppValue.pages;
     return Selector<LandingProvider, int>(
       selector: (_, provider) => provider.headerIndex,
@@ -39,32 +39,71 @@ class _Horizontal extends StatelessWidget {
         return Row(
           children: List.generate(
             pages.length,
-            (index) => GestureDetector(
-              onTap: () => onTap.call(index),
-              child: AnimatedContainer(
-                duration: fast,
-                margin: EdgeInsets.only(right: defaultPadding),
-                padding: EdgeInsets.symmetric(
-                    horizontal: defaultPadding * 1.5,
-                    vertical: defaultPadding / 2),
-                decoration: BoxDecoration(
-                  color: header == index
-                      ? theme.colorScheme.secondary
-                      : Colors.transparent,
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(defaultRadius)),
-                ),
-                child: Text(
-                  pages[index].name,
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                    color: header == index ? textDarkColor : null,
-                  ),
-                ),
-              ),
-            ),
+            (index) {
+              return _HeaderTile(
+                onTap: onTap,
+                pages: pages,
+                header: header,
+                index: index,
+              );
+            },
           ),
         );
       },
+    );
+  }
+}
+
+class _HeaderTile extends StatefulWidget {
+  const _HeaderTile({
+    required this.header,
+    required this.index,
+    required this.onTap,
+    required this.pages,
+  });
+  final int header;
+  final int index;
+  final ValueChanged<int> onTap;
+  final List<PageModel> pages;
+
+  @override
+  State<_HeaderTile> createState() => _HeaderTileState();
+}
+
+class _HeaderTileState extends State<_HeaderTile> {
+  bool isHovering = false;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onHover: (value) {
+        isHovering = value;
+        setState(() {});
+      },
+      onTap: () => widget.onTap.call(widget.index),
+      child: AnimatedContainer(
+        duration: fast,
+        margin: EdgeInsets.only(right: defaultPadding),
+        padding: EdgeInsets.symmetric(
+            horizontal: defaultPadding * 1.5, vertical: defaultPadding / 2),
+        decoration: BoxDecoration(
+          color: widget.header == widget.index
+              ? theme.colorScheme.secondary
+              : isHovering
+                  ? theme.colorScheme.secondary.withOpacity(0.2)
+                  : Colors.transparent,
+          borderRadius: BorderRadius.all(Radius.circular(defaultRadius)),
+        ),
+        child: Text(
+          widget.pages[widget.index].name,
+          style: theme.textTheme.bodyMedium!.copyWith(
+            color: widget.header == widget.index ? textDarkColor : null,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -22,13 +22,13 @@ class Social extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-                color: socialBgDark,
+                color: socialBgDark.withOpacity(0.5),
                 blurRadius: 15,
                 offset: const Offset(4, 4),
                 spreadRadius: 1),
             if (isLightMode)
               BoxShadow(
-                  color: socialBgLight,
+                  color: socialBgLight.withOpacity(0.5),
                   blurRadius: 15,
                   offset: const Offset(-4, -4),
                   spreadRadius: 1),

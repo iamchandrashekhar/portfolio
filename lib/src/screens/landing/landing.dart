@@ -1,6 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/screens/landing/headers.dart';
@@ -8,6 +8,7 @@ import 'package:portfolio/src/screens/landing/theme_toggle.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
+import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -18,36 +19,90 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
-  PageController pageController = PageController(initialPage: 0);
-
   final pages = AppValue.pages;
-  Device? device;
+  ScrollController scrollController = ScrollController();
+
+  // Global keys only for getting widget's size
+  // So we can scroll to specific widget and update top nav bar index
+  List<GlobalKey> globalKeys = [];
+  List<double> widgetsHeight = [];
+  List<double> heightSum = [];
+  bool isAnimating = false;
 
   @override
   void dispose() {
-    pageController.removeListener(updateIndex);
-    pageController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    pageController.addListener(updateIndex);
+    scrollController.addListener(updateHeaderWhileScroll);
+
+    // After widget build we get size of each widget using global keys
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      getWidgetSize();
+    });
   }
 
-  void updateIndex() {
-    double page = (pageController.page ?? 0);
-    int p = page.toInt();
-    if (page - p > 0.8) {
-      p++;
+  /// Getting each widget size with global keys attach to them
+  void getWidgetSize() {
+    for (int i = 0; i < globalKeys.length; i++) {
+      widgetsHeight.add(globalKeys[i].currentContext!.size!.height);
+      heightSum.add(widgetsHeight.fold<double>(0, (v, e) => v + e));
     }
-    context.read<LandingProvider>().updateHeaderIndex(p);
   }
 
+  /// Calculate scrolling offset when we navigate through nav bar
+  double calculatePosition(int index) {
+    double position = widgetsHeight
+        .sublist(0, index)
+        .fold<double>(0, (previousValue, element) => previousValue + element);
+    double scrollTo = min(scrollController.position.maxScrollExtent, position);
+    return scrollTo;
+  }
+
+  /// Calculate offset and update index for nav bar indicator
+  void updateHeaderWhileScroll() {
+    if (!isAnimating) {
+      double offset = scrollController.offset;
+      if (offset < scrollController.position.maxScrollExtent) {
+        int i = 0;
+        for (i; i < heightSum.length; i++) {
+          if (offset < heightSum[i]) {
+            break;
+          }
+        }
+        double pos = offset - (heightSum[i] - widgetsHeight[i]);
+        pos = pos / widgetsHeight[i];
+        if (pos > 0.8) {
+          i++;
+        }
+        context.read<LandingProvider>().updateHeaderIndex(i);
+      } else {
+        context
+            .read<LandingProvider>()
+            .updateHeaderIndex(widgetsHeight.length - 1);
+      }
+    }
+  }
+
+  /// Method to scroll to specific widget
   void onTap(int index) {
-    pageController.animateToPage(index,
-        duration: fast, curve: Curves.easeInOut);
+    isAnimating = true;
+    setState(() {});
+
+    context.read<LandingProvider>().updateHeaderIndex(index);
+    scrollController
+        .animateTo(calculatePosition(index),
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.bounceInOut)
+        .then((value) {
+      setState(() {
+        isAnimating = false;
+      });
+    });
   }
 
   @override
@@ -61,10 +116,7 @@ class _LandingPageState extends State<LandingPage>
                 actions: [
                   Header(
                     horizontal: true,
-                    onTap: (index) {
-                      pageController.animateToPage(index,
-                          duration: fast, curve: Curves.easeInOut);
-                    },
+                    onTap: onTap,
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: defaultPadding),
@@ -77,12 +129,15 @@ class _LandingPageState extends State<LandingPage>
           tablet: BottomNavigation(onTap: onTap),
           mobile: BottomNavigation(onTap: onTap),
         ),
-        body: PageView.builder(
-          controller: pageController,
-          pageSnapping: false,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => pages[index].widget,
-          itemCount: pages.length,
+        body: SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            children: List.generate(pages.length, (index) {
+              final key = GlobalKey<_LandingPageState>();
+              globalKeys.add(key);
+              return SizedBox(key: key, child: pages[index].widget);
+            }, growable: false),
+          ),
         ),
       ),
     );

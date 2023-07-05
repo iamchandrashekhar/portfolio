@@ -15,8 +15,11 @@ Color textDarkColor = Colors.white;
 Color textGrey = const Color(0xB0FFFFFF);
 Color socialBgLight = const Color(0xffffffff);
 Color socialBgDark = const Color(0xff252323);
+Color transparent = Colors.transparent;
+
 // Duration
 
+Duration fastest = const Duration(milliseconds: 100);
 Duration fast = const Duration(milliseconds: 200);
 Duration medium = const Duration(milliseconds: 400);
 Duration slow = const Duration(milliseconds: 600);
