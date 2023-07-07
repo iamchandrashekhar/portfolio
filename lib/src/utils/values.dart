@@ -43,7 +43,7 @@ class AppValue {
     "ansible": 'assets/images/tech_badges/ansible_logo.svg',
     "docker": 'assets/images/tech_badges/docker_logo.svg',
     "flutter": 'assets/images/tech_badges/flutter_logo.svg',
-    "kubernets": 'assets/images/tech_badges/kubernetes_logo.svg',
+    "kubernetes": 'assets/images/tech_badges/kubernetes_logo.svg',
     "python": 'assets/images/tech_badges/python_logo.svg',
   };
 }

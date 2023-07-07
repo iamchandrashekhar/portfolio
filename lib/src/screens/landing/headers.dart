@@ -180,6 +180,7 @@ class _Grid extends StatelessWidget {
                   children: List.generate(
                     pages.length,
                     (index) => GestureDetector(
+                      behavior: HitTestBehavior.translucent,
                       onTap: () => onTap(index),
                       child: AnimatedContainer(
                         width: 100,

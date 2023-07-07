@@ -57,6 +57,7 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
           ),
           textAlign: textAlign,
           child: AnimatedTextKit(
+            totalRepeatCount: 1,
             animatedTexts: [
               TypewriterAnimatedText(AppValue.hello,
                   speed: fastest, textAlign: textAlign)
@@ -111,6 +112,8 @@ class MobileAndTablet extends StatelessWidget {
             children: introList(textAlign: TextAlign.center, txt: txt),
           ),
         ),
+        heightBox(defaultPadding),
+        const ImageStack()
       ],
     );
   }
