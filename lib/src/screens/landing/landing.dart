@@ -96,8 +96,7 @@ class _LandingPageState extends State<LandingPage>
     context.read<LandingProvider>().updateHeaderIndex(index);
     scrollController
         .animateTo(calculatePosition(index),
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.bounceInOut)
+            duration: fast, curve: Curves.bounceInOut)
         .then((value) {
       setState(() {
         isAnimating = false;
@@ -112,14 +111,17 @@ class _LandingPageState extends State<LandingPage>
       child: Scaffold(
         appBar: isDesktop(MediaQuery.of(context).size.width)
             ? AppBar(
-                title: const TitleWidget(),
+                title: Padding(
+                  padding: EdgeInsets.only(left: defaultPadding),
+                  child: const TitleWidget(),
+                ),
                 actions: [
                   Header(
                     horizontal: true,
                     onTap: onTap,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: defaultPadding),
+                    padding: EdgeInsets.only(right: defaultPadding * 3),
                     child: const ThemeToggle(),
                   ),
                 ],

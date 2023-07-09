@@ -11,8 +11,9 @@ Color bgDarkColor = const Color(0xFF2D2D32);
 
 Color redColor = const Color(0xFFD54646);
 Color textLightColor = Colors.black;
-Color textDarkColor = Colors.white;
-Color textGrey = const Color(0xB0FFFFFF);
+Color textDarkColor = const Color(0xFFFFFFFF);
+Color lightGrey = const Color(0xB0FFFFFF);
+Color darkGrey = const Color(0xff363737);
 Color socialBgLight = const Color(0xffffffff);
 Color socialBgDark = const Color(0xff252323);
 Color transparent = Colors.transparent;
@@ -28,3 +29,4 @@ Duration slow = const Duration(milliseconds: 600);
 
 double defaultPadding = 16;
 double defaultRadius = 8;
+double techStackSize = 28;

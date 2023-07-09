@@ -1,3 +1,4 @@
+import 'package:portfolio/src/models/project_model.dart';
 import 'package:portfolio/src/screens/contact/contact.dart';
 import 'package:portfolio/src/screens/homepage/homepage.dart';
 import 'package:portfolio/src/screens/projects/project.dart';
@@ -46,4 +47,24 @@ class AppValue {
     "kubernetes": 'assets/images/tech_badges/kubernetes_logo.svg',
     "python": 'assets/images/tech_badges/python_logo.svg',
   };
+
+  // Project page
+
+  static String myProjects = "My Projects";
+  static String projectsAbout =
+      "Following projects showcases my skills and experience through real-world examples of my work. Each project is briefly described with links to code repositories and live demos in it. It reflects my ability to solve complex problems, work with different technologies, and manage projects effectively.";
+  static List<ProjectModel> projectList = [
+    ProjectModel(
+      name: "Lorem ipsum dolor sit amet",
+      description:
+          "What team web live be got as don't later. This reference these quick cc. Problem fruit hiring impact pulling requirements shark spaces. If as due keep culture.",
+      techStack: [
+        "assets/images/tech_badges/flutter_logo.svg",
+        "assets/images/tech_badges/ansible_logo.svg",
+        "assets/images/tech_badges/docker_logo.svg",
+        "assets/images/tech_badges/python_logo.svg",
+      ],
+      link: "github.com",
+    )
+  ];
 }

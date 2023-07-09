@@ -4,6 +4,7 @@ import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/homepage/image_stack.dart';
 import 'package:portfolio/src/screens/homepage/socials.dart';
+import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -15,7 +16,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
-    return ConstrainedBox(
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: responsiveValues<double>(
+              defaultPadding * 2, defaultPadding * 2.5, defaultPadding * 3)),
       constraints: BoxConstraints(minHeight: 100.h),
       child: ResponsiveWidget(
         mobile: const MobileAndTablet(),
@@ -23,13 +27,10 @@ class HomePage extends StatelessWidget {
         desktop: Row(
           children: [
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: introList(textAlign: TextAlign.left, txt: txt),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: introList(textAlign: TextAlign.left, txt: txt),
               ),
             ),
             const Expanded(child: ImageStack())
@@ -47,20 +48,23 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
       children: [
         Text(
           AppValue.hello,
-          style: txt.displayMedium!
+          style: txt.displayLarge!
               .copyWith(fontWeight: FontWeight.bold, color: transparent),
           textAlign: textAlign,
         ),
         DefaultTextStyle(
-          style: txt.displayMedium!.copyWith(
+          style: txt.displayLarge!.copyWith(
             fontWeight: FontWeight.bold,
           ),
           textAlign: textAlign,
           child: AnimatedTextKit(
             totalRepeatCount: 1,
             animatedTexts: [
-              TypewriterAnimatedText(AppValue.hello,
-                  speed: fastest, textAlign: textAlign)
+              TypewriterAnimatedText(
+                AppValue.hello,
+                speed: fastest,
+                textAlign: textAlign,
+              )
             ],
           ),
         ),
@@ -68,18 +72,19 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
     ),
     Text(
       AppValue.designation,
-      style: txt.titleLarge!.copyWith(
-        height: 3,
-      ),
+      style: txt.titleLarge!.copyWith(height: 3),
     ),
     Text(
       AppValue.about,
-      style: txt.titleMedium!.copyWith(height: 2),
+      style: txt.titleLarge!.copyWith(
+        height: 2,
+        color: getColor(light: darkGrey, dark: lightGrey),
+      ),
       textAlign: textAlign,
     ),
-    heightBox(30),
+    heightBox(60),
     Text("Find me on", style: txt.titleLarge),
-    heightBox(20),
+    heightBox(defaultPadding),
     Wrap(
       children: List.generate(
         socials.length,
@@ -88,7 +93,8 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
           child: Social(svgPath: socials[index].svgPath),
         ),
       ),
-    )
+    ),
+    heightBox(defaultPadding),
   ];
 }
 
@@ -104,16 +110,14 @@ class MobileAndTablet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         heightBox(defaultPadding * 3),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: introList(textAlign: TextAlign.center, txt: txt),
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: introList(textAlign: TextAlign.center, txt: txt),
         ),
         heightBox(defaultPadding),
-        const ImageStack()
+        const ImageStack(),
+        heightBox(defaultPadding),
       ],
     );
   }

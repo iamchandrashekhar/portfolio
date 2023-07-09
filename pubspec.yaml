@@ -42,6 +42,7 @@ dependencies:
   flutter_svg: ^2.0.7
   responsive_sizer: ^3.1.1
   animated_text_kit: ^4.2.2
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
     - assets/images/pages/
     - assets/images/socials/
     - assets/images/tech_badges/
+    - assets/images/blob/
     
     # - images/a_dot_ham.jpeg
 

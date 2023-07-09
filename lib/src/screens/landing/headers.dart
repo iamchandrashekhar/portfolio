@@ -99,7 +99,7 @@ class _HeaderTileState extends State<_HeaderTile> {
         ),
         child: Text(
           widget.pages[widget.index].name,
-          style: theme.textTheme.bodyMedium!.copyWith(
+          style: theme.textTheme.titleMedium!.copyWith(
             color: widget.header == widget.index ? textDarkColor : null,
           ),
         ),
