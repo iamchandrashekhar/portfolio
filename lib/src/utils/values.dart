@@ -67,4 +67,13 @@ class AppValue {
       link: "github.com",
     )
   ];
+
+  // Skiils
+
+  static String skills = "Skills";
+  static List<String> skillsList = [
+    'assets/images/tech_badges/flutter_logo.svg',
+    'assets/images/tech_badges/ansible_logo.svg',
+    'assets/images/tech_badges/docker_logo.svg',
+  ];
 }

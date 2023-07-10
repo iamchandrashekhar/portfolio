@@ -16,7 +16,7 @@ Color lightGrey = const Color(0xB0FFFFFF);
 Color darkGrey = const Color(0xff363737);
 Color socialBgLight = const Color(0xffffffff);
 Color socialBgDark = const Color(0xff252323);
-Color transparent = Colors.transparent;
+Color transparent = const Color(0x00000000);
 
 // Duration
 
