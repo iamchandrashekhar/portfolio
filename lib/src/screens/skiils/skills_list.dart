@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 
@@ -29,32 +28,37 @@ class SkillsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    const double size = 70;
+    final txt = theme.textTheme;
+    const double size = 60;
     return Padding(
-      padding: EdgeInsets.all(defaultPadding).copyWith(left: 0),
+      padding:
+          EdgeInsets.only(bottom: defaultPadding, right: defaultPadding * 1.5),
       child: Container(
-        width: size + 10,
-        height: size + 10,
+        width: 150,
+        height: 130,
         clipBehavior: Clip.hardEdge,
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultPadding * 2,
+          vertical: defaultPadding * 1.5,
+        ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(defaultRadius * 2)),
-            boxShadow: [
-              BoxShadow(
-                color: theme.textTheme.bodyLarge!.color!.withOpacity(0.3),
+          color: theme.colorScheme.onBackground,
+          borderRadius: BorderRadius.all(Radius.circular(defaultRadius * 2)),
+        ),
+        child: FittedBox(
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                image,
+                width: size,
+                height: size,
               ),
-              BoxShadow(
-                color: theme.colorScheme.background,
-                spreadRadius: -5.0,
-                blurRadius: 12.0,
+              heightBox(defaultPadding),
+              Text(
+                "Flutter",
+                style: txt.titleMedium,
               )
-            ]),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: SvgPicture.asset(
-            image,
-            width: size,
-            height: size,
+            ],
           ),
         ),
       ),
