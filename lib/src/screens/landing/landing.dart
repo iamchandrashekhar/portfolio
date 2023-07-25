@@ -111,6 +111,8 @@ class _LandingPageState extends State<LandingPage>
       child: Scaffold(
         appBar: isDesktop(MediaQuery.of(context).size.width)
             ? AppBar(
+                elevation: 4,
+                shadowColor: Colors.black38,
                 title: Padding(
                   padding: EdgeInsets.only(left: defaultPadding),
                   child: const TitleWidget(),

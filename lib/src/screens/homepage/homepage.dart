@@ -90,7 +90,7 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
         socials.length,
         (index) => Padding(
           padding: EdgeInsets.all(defaultPadding).copyWith(left: 0),
-          child: Social(svgPath: socials[index].svgPath),
+          child: Social(svgPath: socials[index].svgSource),
         ),
       ),
     ),

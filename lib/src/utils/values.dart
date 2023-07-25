@@ -4,7 +4,7 @@ import 'package:portfolio/src/screens/homepage/homepage.dart';
 import 'package:portfolio/src/screens/projects/project.dart';
 import 'package:portfolio/src/screens/skiils/skills.dart';
 import 'package:portfolio/src/models/page_model.dart';
-import 'package:portfolio/src/models/social_model.dart';
+import 'package:portfolio/src/models/image_model.dart';
 
 class AppValue {
   static List<PageModel> pages = [
@@ -26,13 +26,13 @@ class AppValue {
         widget: const Contact()),
   ];
 
-  static List<SocialModel> social = [
-    SocialModel(svgPath: "assets/images/socials/email.svg", link: "mail"),
-    SocialModel(svgPath: "assets/images/socials/github.svg", link: "github"),
-    SocialModel(
-        svgPath: "assets/images/socials/linkedin.svg", link: "linkedin"),
-    SocialModel(
-        svgPath: "assets/images/socials/telegram.svg", link: "telegram"),
+  static List<ImageModel> social = [
+    ImageModel(svgSource: "assets/images/socials/email.svg", link: "mail"),
+    ImageModel(svgSource: "assets/images/socials/github.svg", link: "github"),
+    ImageModel(
+        svgSource: "assets/images/socials/linkedin.svg", link: "linkedin"),
+    ImageModel(
+        svgSource: "assets/images/socials/telegram.svg", link: "telegram"),
   ];
 
   static String hello = "Hello,\nI'm Chandrashekhar";
@@ -41,11 +41,11 @@ class AppValue {
       "Hiring prioritize lift sexy productive ocean bake stand. Knowledge three is harvest 4-blocker can't or. Eco-system minimize cadence also buy-in. Open nail invite nail dive. Meat angel say both conversation conversation closer teeth usabiltiy.";
 
   static Map<String, String> techBadges = {
-    "ansible": 'assets/images/tech_badges/ansible_logo.svg',
-    "docker": 'assets/images/tech_badges/docker_logo.svg',
-    "flutter": 'assets/images/tech_badges/flutter_logo.svg',
-    "kubernetes": 'assets/images/tech_badges/kubernetes_logo.svg',
-    "python": 'assets/images/tech_badges/python_logo.svg',
+    "ansible": 'assets/images/tech_badges/ansible.svg',
+    "docker": 'assets/images/tech_badges/docker.svg',
+    "flutter": 'assets/images/tech_badges/flutter.svg',
+    "kubernetes": 'assets/images/tech_badges/kubernetes.svg',
+    "python": 'assets/images/tech_badges/python.svg',
   };
 
   // Project page
@@ -59,10 +59,10 @@ class AppValue {
       description:
           "What team web live be got as don't later. This reference these quick cc. Problem fruit hiring impact pulling requirements shark spaces. If as due keep culture.",
       techStack: [
-        "assets/images/tech_badges/flutter_logo.svg",
-        "assets/images/tech_badges/ansible_logo.svg",
-        "assets/images/tech_badges/docker_logo.svg",
-        "assets/images/tech_badges/python_logo.svg",
+        "assets/images/tech_badges/flutter.svg",
+        "assets/images/tech_badges/ansible.svg",
+        "assets/images/tech_badges/docker.svg",
+        "assets/images/tech_badges/python.svg",
       ],
       link: "github.com",
     )
@@ -71,10 +71,55 @@ class AppValue {
   // Skiils
 
   static String skills = "Skills";
-  static List<String> skillsList = [
-    'assets/images/tech_badges/flutter_logo.svg',
-    'assets/images/tech_badges/ansible_logo.svg',
-    'assets/images/tech_badges/ansible_logo.svg',
-    'assets/images/tech_badges/docker_logo.svg',
+
+  static List<ImageModel> skillsList = [
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/c.svg',
+      title: "C",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/cpp.svg',
+      title: "CPP",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/python.svg',
+      title: "Python",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/dart.svg',
+      title: "Dart",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/go.svg',
+      title: "Go",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/flask.svg',
+      title: "Flask",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/flutter.svg',
+      title: "Flutter",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/docker.svg',
+      title: "Docker",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/kubernetes.svg',
+      title: "Kubernetes",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/ansible.svg',
+      title: "Ansible",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/jenkins.svg',
+      title: "Jenkins",
+    ),
+    ImageModel(
+      svgSource: 'assets/images/tech_badges/terraform.svg',
+      title: "Terraform",
+    ),
   ];
 }

@@ -14,7 +14,8 @@ class SkillsList extends StatelessWidget {
       children: List.generate(
         skillsList.length,
         (index) => SkillsCard(
-          image: skillsList[index],
+          image: skillsList[index].svgSource,
+          name: skillsList[index].title!,
         ),
       ),
     );
@@ -22,27 +23,28 @@ class SkillsList extends StatelessWidget {
 }
 
 class SkillsCard extends StatelessWidget {
-  const SkillsCard({super.key, required this.image});
+  const SkillsCard({super.key, required this.image, required this.name});
   final String image;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
-    const double size = 60;
+    const double size = 70;
     return Padding(
-      padding:
-          EdgeInsets.only(bottom: defaultPadding, right: defaultPadding * 1.5),
+      padding: EdgeInsets.only(
+          bottom: defaultPadding * 2, right: defaultPadding * 2),
       child: Container(
-        width: 150,
-        height: 130,
+        width: 170,
+        height: 150,
         clipBehavior: Clip.hardEdge,
         padding: EdgeInsets.symmetric(
           horizontal: defaultPadding * 2,
           vertical: defaultPadding * 1.5,
         ),
         decoration: BoxDecoration(
-          color: theme.colorScheme.onBackground,
+          color: txt.bodyLarge!.color!.withOpacity(0.07),
           borderRadius: BorderRadius.all(Radius.circular(defaultRadius * 2)),
         ),
         child: FittedBox(
@@ -52,11 +54,16 @@ class SkillsCard extends StatelessWidget {
                 image,
                 width: size,
                 height: size,
+                colorFilter: image.contains("flask")
+                    ? ColorFilter.mode(txt.bodyLarge!.color!, BlendMode.srcATop)
+                    : const ColorFilter.mode(
+                        Colors.transparent, BlendMode.clear),
               ),
-              heightBox(defaultPadding),
+              heightBox(defaultPadding * 1.5),
               Text(
-                "Flutter",
-                style: txt.titleMedium,
+                name,
+                style: txt.titleMedium!
+                    .copyWith(fontWeight: FontWeight.bold, letterSpacing: 1.1),
               )
             ],
           ),
