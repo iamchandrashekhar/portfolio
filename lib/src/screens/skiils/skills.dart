@@ -13,12 +13,13 @@ class Skills extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 75.h),
+    return Container(
+      width: double.maxFinite,
+      constraints: BoxConstraints(minHeight: 80.h),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: responsiveValues<double>(
-            defaultPadding * 1.5,
+            defaultPadding * 2,
             defaultPadding * 2.5,
             defaultPadding * 3,
           ),

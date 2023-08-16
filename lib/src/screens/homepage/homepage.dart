@@ -22,8 +22,8 @@ class HomePage extends StatelessWidget {
               defaultPadding * 2, defaultPadding * 2.5, defaultPadding * 3)),
       constraints: BoxConstraints(minHeight: 100.h),
       child: ResponsiveWidget(
-        mobile: const MobileAndTablet(),
-        tablet: const MobileAndTablet(),
+        mobile: const _MobileAndTablet(),
+        tablet: const _MobileAndTablet(),
         desktop: Row(
           children: [
             Expanded(
@@ -98,10 +98,8 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
   ];
 }
 
-class MobileAndTablet extends StatelessWidget {
-  const MobileAndTablet({
-    super.key,
-  });
+class _MobileAndTablet extends StatelessWidget {
+  const _MobileAndTablet();
 
   @override
   Widget build(BuildContext context) {

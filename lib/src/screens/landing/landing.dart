@@ -136,11 +136,15 @@ class _LandingPageState extends State<LandingPage>
         body: SingleChildScrollView(
           controller: scrollController,
           child: Column(
-            children: List.generate(pages.length, (index) {
-              final key = GlobalKey<_LandingPageState>();
-              globalKeys.add(key);
-              return SizedBox(key: key, child: pages[index].widget);
-            }, growable: false),
+            children: List.generate(
+              pages.length,
+              (index) {
+                final key = GlobalKey<_LandingPageState>();
+                globalKeys.add(key);
+                return SizedBox(key: key, child: pages[index].widget);
+              },
+              growable: false,
+            ),
           ),
         ),
       ),

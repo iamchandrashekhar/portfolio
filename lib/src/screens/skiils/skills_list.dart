@@ -45,7 +45,8 @@ class SkillsCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: txt.bodyLarge!.color!.withOpacity(0.07),
-          borderRadius: const BorderRadius.all(Radius.circular(defaultRadius * 2)),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(defaultRadius * 2)),
         ),
         child: FittedBox(
           child: Column(
