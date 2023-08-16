@@ -86,8 +86,8 @@ class _HeaderTileState extends State<_HeaderTile> {
       onTap: () => widget.onTap.call(widget.index),
       child: AnimatedContainer(
         duration: fast,
-        margin: EdgeInsets.only(right: defaultPadding),
-        padding: EdgeInsets.symmetric(
+        margin: const EdgeInsets.only(right: defaultPadding),
+        padding: const EdgeInsets.symmetric(
             horizontal: defaultPadding * 1.5, vertical: defaultPadding / 2),
         decoration: BoxDecoration(
           color: widget.header == widget.index
@@ -95,7 +95,7 @@ class _HeaderTileState extends State<_HeaderTile> {
               : isHovering
                   ? theme.colorScheme.secondary.withOpacity(0.2)
                   : Colors.transparent,
-          borderRadius: BorderRadius.all(Radius.circular(defaultRadius)),
+          borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
         ),
         child: Text(
           widget.pages[widget.index].name,
@@ -168,7 +168,7 @@ class _Grid extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.all(defaultPadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -187,8 +187,8 @@ class _Grid extends StatelessWidget {
                         height: 80,
                         duration: fast,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(defaultPadding / 2),
-                        padding: EdgeInsets.all(defaultPadding / 2),
+                        margin: const EdgeInsets.all(defaultPadding / 2),
+                        padding: const EdgeInsets.all(defaultPadding / 2),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

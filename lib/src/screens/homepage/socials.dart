@@ -13,11 +13,11 @@ class Social extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      padding: EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.all(defaultPadding),
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: theme.colorScheme.onBackground,
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(defaultRadius),
           ),
           boxShadow: [

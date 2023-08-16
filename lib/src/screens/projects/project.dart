@@ -120,7 +120,7 @@ class _MobileAndTablet extends StatelessWidget {
             children: headingAndBody(theme: theme),
           ),
         ),
-        const Projects(),
+        const ProjectCards(),
       ],
     );
   }

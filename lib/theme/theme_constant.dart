@@ -18,6 +18,9 @@ Color socialBgLight = const Color(0xffffffff);
 Color socialBgDark = const Color(0xff252323);
 Color transparent = const Color(0x00000000);
 
+Color snackBarSuccess = const Color(0xFF4CAF50);
+Color snackBarFailed = const Color(0xFFF44336);
+
 // Duration
 
 Duration fastest = const Duration(milliseconds: 100);
@@ -27,6 +30,6 @@ Duration slow = const Duration(milliseconds: 600);
 
 // Double constants
 
-double defaultPadding = 16;
-double defaultRadius = 8;
-double techStackSize = 28;
+const double defaultPadding = 16;
+const double defaultRadius = 8;
+const double techStackSize = 28;

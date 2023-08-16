@@ -19,7 +19,7 @@ class TechStack extends StatelessWidget {
           child: Container(
             width: techStackSize,
             height: techStackSize,
-            padding: EdgeInsets.all(defaultPadding / 3),
+            padding: const EdgeInsets.all(defaultPadding / 3),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: socialBgLight,

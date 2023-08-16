@@ -122,4 +122,17 @@ class AppValue {
       title: "Terraform",
     ),
   ];
+
+  // Contacts
+  static String contactMe = "Contact Me";
+  static String getInTouch = "Get In Touch";
+
+  static List<ImageModel> contactDetails = [
+    ImageModel(
+        svgSource: "assets/images/socials/email_border.svg",
+        title: "chandrashekhar3227@gmail.com"),
+    ImageModel(
+        svgSource: "assets/images/socials/linkedin_border.svg",
+        title: "chandrashekharpanwar"),
+  ];
 }

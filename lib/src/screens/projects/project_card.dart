@@ -17,7 +17,7 @@ class ProjectCards extends StatelessWidget {
       children: List.generate(
         projects.length,
         (index) => Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
               top: defaultPadding * 4, right: defaultPadding * 4),
           child: _CardWidget(
             name: projects[index].name,
@@ -52,10 +52,10 @@ class _CardWidget extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      padding: EdgeInsets.all(defaultPadding * 2),
+      padding: const EdgeInsets.all(defaultPadding * 2),
       decoration: BoxDecoration(
         color: theme.colorScheme.onBackground,
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(defaultRadius * 3),
         ),
         boxShadow: [

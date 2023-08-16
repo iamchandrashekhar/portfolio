@@ -89,7 +89,7 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
       children: List.generate(
         socials.length,
         (index) => Padding(
-          padding: EdgeInsets.all(defaultPadding).copyWith(left: 0),
+          padding: const EdgeInsets.all(defaultPadding).copyWith(left: 0),
           child: Social(svgPath: socials[index].svgSource),
         ),
       ),

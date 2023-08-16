@@ -40,7 +40,7 @@ class _LandingPageState extends State<LandingPage>
     super.initState();
     scrollController.addListener(updateHeaderWhileScroll);
 
-    // After widget build we get size of each widget using global keys
+    // We get size of each widget using global keys after widget build
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       getWidgetSize();
     });
@@ -113,18 +113,18 @@ class _LandingPageState extends State<LandingPage>
             ? AppBar(
                 elevation: 4,
                 shadowColor: Colors.black38,
-                title: Padding(
+                title: const Padding(
                   padding: EdgeInsets.only(left: defaultPadding),
-                  child: const TitleWidget(),
+                  child: TitleWidget(),
                 ),
                 actions: [
                   Header(
                     horizontal: true,
                     onTap: onTap,
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(right: defaultPadding * 3),
-                    child: const ThemeToggle(),
+                    child: ThemeToggle(),
                   ),
                 ],
               )
@@ -155,7 +155,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final txt = Theme.of(context).textTheme;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+      padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
       child: RichText(
         text: TextSpan(
           children: const [
@@ -194,9 +194,9 @@ class BottomNavigation extends StatelessWidget {
               child: TitleWidget(),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: defaultPadding),
-            child: const ThemeToggle(),
+            child: ThemeToggle(),
           ),
           Header(
             horizontal: false,

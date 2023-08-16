@@ -15,6 +15,7 @@ ThemeData getThemeData({required bool isLightTheme}) {
     colorScheme: getColorScheme(isLightTheme: isLightTheme),
     scaffoldBackgroundColor: isLightTheme ? bgLightColor : bgDarkColor,
     textTheme: getTextTheme(isLightTheme: isLightTheme),
+    elevatedButtonTheme: getElevatedBtnThm(),
   );
 }
 
@@ -57,6 +58,30 @@ TextTheme getTextTheme({required bool isLightTheme}) {
       bodyLarge: TextStyle(color: color),
       bodyMedium: TextStyle(color: color),
       bodySmall: TextStyle(color: color),
+    ),
+  );
+}
+
+ElevatedButtonThemeData getElevatedBtnThm() {
+  return ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStatePropertyAll(redColor),
+      foregroundColor: MaterialStatePropertyAll(textDarkColor),
+      overlayColor: MaterialStatePropertyAll(redColor),
+      visualDensity: VisualDensity.standard,
+      shape: const MaterialStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(defaultRadius * 2),
+          ),
+        ),
+      ),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.symmetric(
+          vertical: defaultPadding,
+          horizontal: defaultPadding * 1.5,
+        ),
+      ),
     ),
   );
 }

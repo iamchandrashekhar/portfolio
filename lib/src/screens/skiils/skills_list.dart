@@ -33,19 +33,19 @@ class SkillsCard extends StatelessWidget {
     final txt = theme.textTheme;
     const double size = 70;
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
           bottom: defaultPadding * 2, right: defaultPadding * 2),
       child: Container(
         width: 170,
         height: 150,
         clipBehavior: Clip.hardEdge,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: defaultPadding * 2,
           vertical: defaultPadding * 1.5,
         ),
         decoration: BoxDecoration(
           color: txt.bodyLarge!.color!.withOpacity(0.07),
-          borderRadius: BorderRadius.all(Radius.circular(defaultRadius * 2)),
+          borderRadius: const BorderRadius.all(Radius.circular(defaultRadius * 2)),
         ),
         child: FittedBox(
           child: Column(
