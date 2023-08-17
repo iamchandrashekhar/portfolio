@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/models/page_model.dart';
 import 'package:portfolio/src/provider/landing_provider.dart';
@@ -192,15 +192,16 @@ class _Grid extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
+                            AppImage(
                               pages[index].svgPath,
                               width: 24,
                               height: 24,
                               colorFilter: ColorFilter.mode(
-                                  header == index
-                                      ? theme.colorScheme.secondary
-                                      : theme.textTheme.bodyLarge!.color!,
-                                  BlendMode.srcATop),
+                                header == index
+                                    ? theme.colorScheme.secondary
+                                    : theme.textTheme.bodyLarge!.color!,
+                                BlendMode.srcATop,
+                              ),
                             ),
                             heightBox(8),
                             Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/models/image_model.dart';
 import 'package:portfolio/src/utils/values.dart';
@@ -50,7 +50,7 @@ class ContactCard extends StatelessWidget {
       itemCount: details.length,
       itemBuilder: (context, index) => Row(
         children: [
-          SvgPicture.asset(details[index].svgSource),
+          AppImage(details[index].svgSource),
           widthBox(defaultPadding),
           Text(
             details[index].title ?? "",

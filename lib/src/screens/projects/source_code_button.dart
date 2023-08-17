@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class SourceCodeLink extends StatelessWidget {
     bool isLightMode = !context.read<ThemeManager>().isDark();
     return GestureDetector(
       onTap: () {},
-      child: SvgPicture.asset(
+      child: AppImage(
         icon,
         width: techStackSize,
         height: techStackSize,

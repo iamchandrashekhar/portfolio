@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/projects/source_code_button.dart';
 import 'package:portfolio/src/screens/projects/tech_stack.dart';
+import 'package:portfolio/src/utils/assets_list.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 import 'package:provider/provider.dart';
@@ -104,7 +105,7 @@ class _CardWidget extends StatelessWidget {
               children: [
                 TechStack(techList: techStack),
                 SourceCodeLink(
-                  icon: 'assets/images/tech_badges/github.svg',
+                  icon: AppImagesSource.githubIcon,
                   link: link,
                 )
               ],

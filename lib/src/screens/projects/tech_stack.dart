@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/theme/theme_constant.dart';
 import 'package:portfolio/theme/theme_manager.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class TechStack extends StatelessWidget {
                     )
                   : null,
             ),
-            child: SvgPicture.asset(techList[index]),
+            child: AppImage(techList[index]),
           ),
         ),
       ),

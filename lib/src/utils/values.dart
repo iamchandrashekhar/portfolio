@@ -5,34 +5,33 @@ import 'package:portfolio/src/screens/projects/project.dart';
 import 'package:portfolio/src/screens/skiils/skills.dart';
 import 'package:portfolio/src/models/page_model.dart';
 import 'package:portfolio/src/models/image_model.dart';
+import 'package:portfolio/src/utils/assets_list.dart';
 
 class AppValue {
   static List<PageModel> pages = [
     PageModel(
         name: 'Home',
-        svgPath: "assets/images/pages/home.svg",
+        svgPath: AppImagesSource.homeIcon,
         widget: const HomePage()),
     PageModel(
         name: 'Project',
-        svgPath: "assets/images/pages/project.svg",
+        svgPath: AppImagesSource.projectIcon,
         widget: const Projects()),
     PageModel(
         name: 'Skills',
-        svgPath: "assets/images/pages/skills.svg",
+        svgPath: AppImagesSource.skillsIcon,
         widget: const Skills()),
     PageModel(
         name: 'Contact',
-        svgPath: "assets/images/pages/contact.svg",
+        svgPath: AppImagesSource.contactIcon,
         widget: const Contact()),
   ];
 
   static List<ImageModel> social = [
-    ImageModel(svgSource: "assets/images/socials/email.svg", link: "mail"),
-    ImageModel(svgSource: "assets/images/socials/github.svg", link: "github"),
-    ImageModel(
-        svgSource: "assets/images/socials/linkedin.svg", link: "linkedin"),
-    ImageModel(
-        svgSource: "assets/images/socials/telegram.svg", link: "telegram"),
+    ImageModel(svgSource: AppImagesSource.mailIcon, link: "mail"),
+    ImageModel(svgSource: AppImagesSource.githubIcon, link: "github"),
+    ImageModel(svgSource: AppImagesSource.linkedinIcon, link: "linkedin"),
+    ImageModel(svgSource: AppImagesSource.telegramIcon, link: "telegram"),
   ];
 
   static String hello = "Hello,\nI'm Chandrashekhar";
@@ -41,11 +40,11 @@ class AppValue {
       "Hiring prioritize lift sexy productive ocean bake stand. Knowledge three is harvest 4-blocker can't or. Eco-system minimize cadence also buy-in. Open nail invite nail dive. Meat angel say both conversation conversation closer teeth usabiltiy.";
 
   static Map<String, String> techBadges = {
-    "ansible": 'assets/images/tech_badges/ansible.svg',
-    "docker": 'assets/images/tech_badges/docker.svg',
-    "flutter": 'assets/images/tech_badges/flutter.svg',
-    "kubernetes": 'assets/images/tech_badges/kubernetes.svg',
-    "python": 'assets/images/tech_badges/python.svg',
+    "ansible": AppImagesSource.ansibleIcon,
+    "docker": AppImagesSource.dockerIcon,
+    "flutter": AppImagesSource.flutterIcon,
+    "kubernetes": AppImagesSource.kubernetesIcon,
+    "python": AppImagesSource.pythonIcon,
   };
 
   // Project page
@@ -59,10 +58,10 @@ class AppValue {
       description:
           "What team web live be got as don't later. This reference these quick cc. Problem fruit hiring impact pulling requirements shark spaces. If as due keep culture.",
       techStack: [
-        "assets/images/tech_badges/flutter.svg",
-        "assets/images/tech_badges/ansible.svg",
-        "assets/images/tech_badges/docker.svg",
-        "assets/images/tech_badges/python.svg",
+        AppImagesSource.ansibleIcon,
+        AppImagesSource.dockerIcon,
+        AppImagesSource.flaskIcon,
+        AppImagesSource.pythonIcon,
       ],
       link: "github.com",
     )
@@ -74,51 +73,51 @@ class AppValue {
 
   static List<ImageModel> skillsList = [
     ImageModel(
-      svgSource: 'assets/images/tech_badges/c.svg',
+      svgSource: AppImagesSource.cLangIcon,
       title: "C",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/cpp.svg',
+      svgSource: AppImagesSource.cppIcon,
       title: "CPP",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/python.svg',
+      svgSource: AppImagesSource.pythonIcon,
       title: "Python",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/dart.svg',
+      svgSource: AppImagesSource.dartIcon,
       title: "Dart",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/go.svg',
+      svgSource: AppImagesSource.goLangIcon,
       title: "Go",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/flask.svg',
+      svgSource: AppImagesSource.flaskIcon,
       title: "Flask",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/flutter.svg',
+      svgSource: AppImagesSource.flutterIcon,
       title: "Flutter",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/docker.svg',
+      svgSource: AppImagesSource.dockerIcon,
       title: "Docker",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/kubernetes.svg',
+      svgSource: AppImagesSource.kubernetesIcon,
       title: "Kubernetes",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/ansible.svg',
+      svgSource: AppImagesSource.ansibleIcon,
       title: "Ansible",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/jenkins.svg',
+      svgSource: AppImagesSource.jenkinsIcon,
       title: "Jenkins",
     ),
     ImageModel(
-      svgSource: 'assets/images/tech_badges/terraform.svg',
+      svgSource: AppImagesSource.terraformIcon,
       title: "Terraform",
     ),
   ];
@@ -129,10 +128,12 @@ class AppValue {
 
   static List<ImageModel> contactDetails = [
     ImageModel(
-        svgSource: "assets/images/socials/email_border.svg",
-        title: "chandrashekhar3227@gmail.com"),
+      svgSource: AppImagesSource.mailBorderedIcon,
+      title: "chandrashekhar3227@gmail.com",
+    ),
     ImageModel(
-        svgSource: "assets/images/socials/linkedin_border.svg",
-        title: "chandrashekharpanwar"),
+      svgSource: AppImagesSource.linkedinBorderedIcon,
+      title: "chandrashekharpanwar",
+    ),
   ];
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/theme/theme_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Social extends StatelessWidget {
@@ -33,10 +33,12 @@ class Social extends StatelessWidget {
                   offset: const Offset(-4, -4),
                   spreadRadius: 1),
           ]),
-      child: SvgPicture.asset(
+      child: AppImage(
         svgPath,
         colorFilter: ColorFilter.mode(
-            theme.textTheme.bodyLarge!.color!, BlendMode.srcATop),
+          theme.textTheme.bodyLarge!.color!,
+          BlendMode.srcATop,
+        ),
       ),
     );
   }

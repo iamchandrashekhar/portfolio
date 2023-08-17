@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 
 class TechBadge extends StatelessWidget {
   const TechBadge({
@@ -27,7 +27,7 @@ class TechBadge extends StatelessWidget {
         shape: BoxShape.circle,
         color: theme.colorScheme.onBackground,
       ),
-      child: SvgPicture.asset(
+      child: AppImage(
         svgPath,
         width: svgW,
         height: svgH,

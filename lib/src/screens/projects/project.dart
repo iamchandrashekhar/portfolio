@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/projects/project_card.dart';
+import 'package:portfolio/src/utils/assets_list.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
@@ -15,14 +17,14 @@ class Projects extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: 100.h),
-      child: Stack(
+      child: const Stack(
         alignment: Alignment.center,
         children: [
           Align(
             alignment: Alignment.centerRight,
-            child: SvgPicture.asset("assets/images/blob/Blob.svg"),
+            child: AppImage(AppImagesSource.blob),
           ),
-          const ProjectBody(),
+          ProjectBody(),
         ],
       ),
     );

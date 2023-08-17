@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
@@ -51,7 +51,7 @@ class SkillsCard extends StatelessWidget {
         child: FittedBox(
           child: Column(
             children: [
-              SvgPicture.asset(
+              AppImage(
                 image,
                 width: size,
                 height: size,
