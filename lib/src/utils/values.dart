@@ -28,10 +28,26 @@ class AppValue {
   ];
 
   static List<ImageModel> social = [
-    ImageModel(svgSource: AppImagesSource.mailIcon, link: "mail"),
-    ImageModel(svgSource: AppImagesSource.githubIcon, link: "github"),
-    ImageModel(svgSource: AppImagesSource.linkedinIcon, link: "linkedin"),
-    ImageModel(svgSource: AppImagesSource.telegramIcon, link: "telegram"),
+    ImageModel(
+      svgSource: AppImagesSource.mailIcon,
+      link: "chandrashekhar3227@gmail.com",
+      title: "Mail",
+    ),
+    ImageModel(
+      svgSource: AppImagesSource.githubIcon,
+      link: "github.com/iamchandrashekhar",
+      title: "GitHub",
+    ),
+    ImageModel(
+      svgSource: AppImagesSource.linkedinIcon,
+      link: "www.linkedin.com/in/chandra-shekhar-panwar",
+      title: "LinkedIn",
+    ),
+    ImageModel(
+      svgSource: AppImagesSource.telegramIcon,
+      link: "t.me/itsNuclear",
+      title: "Telegram",
+    ),
   ];
 
   static String hello = "Hello,\nI'm Chandrashekhar";

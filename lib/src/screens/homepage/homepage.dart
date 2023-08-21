@@ -2,7 +2,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
-import 'package:portfolio/src/screens/homepage/image_stack.dart';
 import 'package:portfolio/src/screens/homepage/socials.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
@@ -24,17 +23,13 @@ class HomePage extends StatelessWidget {
       child: ResponsiveWidget(
         mobile: const _MobileAndTablet(),
         tablet: const _MobileAndTablet(),
-        desktop: Row(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: introList(textAlign: TextAlign.left, txt: txt),
-              ),
-            ),
-            const Expanded(child: ImageStack())
-          ],
+        desktop: SizedBox(
+          width: 50.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: introList(textAlign: TextAlign.center, txt: txt),
+          ),
         ),
       ),
     );
@@ -90,7 +85,11 @@ List<Widget> introList({required TextAlign textAlign, required TextTheme txt}) {
         socials.length,
         (index) => Padding(
           padding: const EdgeInsets.all(defaultPadding).copyWith(left: 0),
-          child: Social(svgPath: socials[index].svgSource),
+          child: Social(
+            svgPath: socials[index].svgSource,
+            link: socials[index].link!,
+            semanticsLabel: socials[index].title!,
+          ),
         ),
       ),
     ),
@@ -114,7 +113,7 @@ class _MobileAndTablet extends StatelessWidget {
           children: introList(textAlign: TextAlign.center, txt: txt),
         ),
         heightBox(defaultPadding),
-        const ImageStack(),
+        // const ImageStack(),
         heightBox(defaultPadding),
       ],
     );

@@ -9,11 +9,13 @@ class AppImage extends StatelessWidget {
     this.height,
     this.fit = BoxFit.contain,
     this.colorFilter,
+    this.semanticsLabel,
   });
   final String source;
   final double? width;
   final double? height;
   final BoxFit fit;
+  final String? semanticsLabel;
   final ColorFilter? colorFilter;
 
   @override
@@ -25,6 +27,7 @@ class AppImage extends StatelessWidget {
             height: height,
             fit: fit,
             colorFilter: colorFilter,
+            semanticsLabel: semanticsLabel,
           )
         : SvgPicture.asset(
             source,
@@ -32,6 +35,7 @@ class AppImage extends StatelessWidget {
             height: height,
             fit: fit,
             colorFilter: colorFilter,
+            semanticsLabel: semanticsLabel,
           );
   }
 }
