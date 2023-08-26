@@ -51,9 +51,9 @@ class AppValue {
   ];
 
   static String hello = "Hello,\nI'm Chandrashekhar";
-  static String designation = "DevOps Engineer";
+  static String designation = "Flutter Developer";
   static String about =
-      "Hiring prioritize lift sexy productive ocean bake stand. Knowledge three is harvest 4-blocker can't or. Eco-system minimize cadence also buy-in. Open nail invite nail dive. Meat angel say both conversation conversation closer teeth usabiltiy.";
+      "I am a Flutter developer with 2 years of experience in developing mobile applications for Android and iOS. I have a strong understanding of the Flutter framework and its capabilities, and I am proficient in using its widgets and APIs to create beautiful and user-friendly apps. I am also familiar with the Dart programming language and its syntax.";
 
   static Map<String, String> techBadges = {
     "ansible": AppImagesSource.ansibleIcon,
@@ -70,17 +70,26 @@ class AppValue {
       "Following projects showcases my skills and experience through real-world examples of my work. Each project is briefly described with links to code repositories and live demos in it. It reflects my ability to solve complex problems, work with different technologies, and manage projects effectively.";
   static List<ProjectModel> projectList = [
     ProjectModel(
-      name: "Lorem ipsum dolor sit amet",
-      description:
-          "What team web live be got as don't later. This reference these quick cc. Problem fruit hiring impact pulling requirements shark spaces. If as due keep culture.",
+      name: "System calls and capabilities in docker",
+      description: "",
       techStack: [
-        AppImagesSource.ansibleIcon,
-        AppImagesSource.dockerIcon,
+        AppImagesSource.htmlIcon,
+        AppImagesSource.cssIcon,
         AppImagesSource.flaskIcon,
         AppImagesSource.pythonIcon,
       ],
-      link: "github.com",
-    )
+      link:
+          "github.com/iamchandrashekhar/System-calls-and-Capabilities-in-Docker",
+    ),
+    ProjectModel(
+      name: "Portfolio",
+      description: "",
+      techStack: [
+        AppImagesSource.flutterIcon,
+        AppImagesSource.firebaseIcon,
+      ],
+      link: "github.com/iamchandrashekhar/portfolio",
+    ),
   ];
 
   // Skiils
@@ -113,6 +122,10 @@ class AppValue {
       title: "Flask",
     ),
     ImageModel(
+      svgSource: AppImagesSource.firebaseIcon,
+      title: "Firebase",
+    ),
+    ImageModel(
       svgSource: AppImagesSource.flutterIcon,
       title: "Flutter",
     ),
@@ -124,18 +137,6 @@ class AppValue {
       svgSource: AppImagesSource.kubernetesIcon,
       title: "Kubernetes",
     ),
-    ImageModel(
-      svgSource: AppImagesSource.ansibleIcon,
-      title: "Ansible",
-    ),
-    ImageModel(
-      svgSource: AppImagesSource.jenkinsIcon,
-      title: "Jenkins",
-    ),
-    ImageModel(
-      svgSource: AppImagesSource.terraformIcon,
-      title: "Terraform",
-    ),
   ];
 
   // Contacts
@@ -145,11 +146,18 @@ class AppValue {
   static List<ImageModel> contactDetails = [
     ImageModel(
       svgSource: AppImagesSource.mailBorderedIcon,
-      title: "chandrashekhar3227@gmail.com",
+      link: "chandrashekhar3227@gmail.com",
+      title: "Send an email",
     ),
     ImageModel(
       svgSource: AppImagesSource.linkedinBorderedIcon,
-      title: "chandrashekharpanwar",
+      link: "www.linkedin.com/in/chandra-shekhar-panwar",
+      title: "Connect on LinkedIn",
+    ),
+    ImageModel(
+      svgSource: AppImagesSource.telegramCircleIcon,
+      link: "t.me/itsNuclear",
+      title: "Find me on Telegram",
     ),
   ];
 }
