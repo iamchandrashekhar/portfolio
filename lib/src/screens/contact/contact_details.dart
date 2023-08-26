@@ -54,7 +54,7 @@ class ContactCard extends StatelessWidget {
             .hasMatch(details[index].link!)) {
           uri = Uri(scheme: "mailto", path: details[index].link!);
         } else {
-          uri = Uri(scheme: "https", path: details[index].link!);
+          uri = Uri.parse(details[index].link!);
         }
 
         return Link(

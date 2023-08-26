@@ -23,7 +23,7 @@ class Social extends StatelessWidget {
     if (RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$').hasMatch(link)) {
       uri = Uri(scheme: "mailto", path: link);
     } else {
-      uri = Uri(scheme: "https", path: link);
+      uri = Uri.parse(link);
     }
     return Link(
       uri: uri,

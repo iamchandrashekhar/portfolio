@@ -17,7 +17,7 @@ class SourceCodeLink extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLightMode = !context.read<ThemeManager>().isDark();
     return Link(
-        uri: Uri(scheme: "https", path: link),
+        uri: Uri.parse(link),
         target: LinkTarget.blank,
         builder: (context, followLink) {
           return InkWell(

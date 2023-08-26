@@ -35,17 +35,17 @@ class AppValue {
     ),
     ImageModel(
       svgSource: AppImagesSource.githubIcon,
-      link: "github.com/iamchandrashekhar",
+      link: "https://github.com/iamchandrashekhar",
       title: "GitHub",
     ),
     ImageModel(
       svgSource: AppImagesSource.linkedinIcon,
-      link: "www.linkedin.com/in/chandra-shekhar-panwar",
+      link: "https://www.linkedin.com/in/chandra-shekhar-panwar",
       title: "LinkedIn",
     ),
     ImageModel(
       svgSource: AppImagesSource.telegramIcon,
-      link: "t.me/itsNuclear",
+      link: "https://t.me/itsNuclear",
       title: "Telegram",
     ),
   ];
@@ -80,7 +80,7 @@ class AppValue {
         AppImagesSource.flaskIcon,
       ],
       link:
-          "github.com/iamchandrashekhar/System-calls-and-Capabilities-in-Docker",
+          "https://github.com/iamchandrashekhar/System-calls-and-Capabilities-in-Docker",
     ),
     ProjectModel(
       name: "Portfolio",
@@ -90,7 +90,7 @@ class AppValue {
         AppImagesSource.flutterIcon,
         AppImagesSource.firebaseIcon,
       ],
-      link: "github.com/iamchandrashekhar/portfolio",
+      link: "https://github.com/iamchandrashekhar/portfolio",
     ),
   ];
 
@@ -153,12 +153,12 @@ class AppValue {
     ),
     ImageModel(
       svgSource: AppImagesSource.linkedinBorderedIcon,
-      link: "www.linkedin.com/in/chandra-shekhar-panwar",
+      link: "http://www.linkedin.com/in/chandra-shekhar-panwar",
       title: "Connect on LinkedIn",
     ),
     ImageModel(
       svgSource: AppImagesSource.telegramCircleIcon,
-      link: "t.me/itsNuclear",
+      link: "https://t.me/itsNuclear",
       title: "Find me on Telegram",
     ),
   ];
