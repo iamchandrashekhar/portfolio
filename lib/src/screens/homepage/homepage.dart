@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         mobile: const _MobileAndTablet(),
         tablet: const _MobileAndTablet(),
         desktop: SizedBox(
-          width: 50.w,
+          width: MediaQuery.of(context).size.width * 0.5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
