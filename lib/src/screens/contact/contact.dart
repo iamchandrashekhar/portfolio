@@ -24,19 +24,24 @@ class Contact extends StatelessWidget {
       child: ResponsiveWidget(
         mobile: const _MobileAndTablet(),
         tablet: const _MobileAndTablet(),
-        desktop: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        desktop: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Expanded(
-              child: ContactDetails(
-                crossAxisAlignment: CrossAxisAlignment.start,
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Expanded(
+                  child: ContactDetails(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Expanded(
+                  child: ContactForm(),
+                )
+              ],
             ),
-            Expanded(
-              child: ContactForm(),
-            )
           ],
         ),
       ),

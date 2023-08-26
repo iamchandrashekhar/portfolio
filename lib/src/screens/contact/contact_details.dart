@@ -15,7 +15,6 @@ class ContactDetails extends StatelessWidget {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
     return Column(
-      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: crossAxisAlignment,
       children: [
         Text(

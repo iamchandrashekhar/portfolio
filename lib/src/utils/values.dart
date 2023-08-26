@@ -71,19 +71,21 @@ class AppValue {
   static List<ProjectModel> projectList = [
     ProjectModel(
       name: "System calls and capabilities in docker",
-      description: "",
+      description:
+          "This project will demonstrate how to use system calls in Docker. A system call is a request made by a process to the kernel of an operating system. System calls are used to perform tasks such as reading and writing files, creating and deleting processes, and accessing network resources.",
       techStack: [
         AppImagesSource.htmlIcon,
         AppImagesSource.cssIcon,
-        AppImagesSource.flaskIcon,
         AppImagesSource.pythonIcon,
+        AppImagesSource.flaskIcon,
       ],
       link:
           "github.com/iamchandrashekhar/System-calls-and-Capabilities-in-Docker",
     ),
     ProjectModel(
       name: "Portfolio",
-      description: "",
+      description:
+          "A Portfolio web app created using flutter and firebase. Which feature some of my GitHub projects as well as technical skills.",
       techStack: [
         AppImagesSource.flutterIcon,
         AppImagesSource.firebaseIcon,
