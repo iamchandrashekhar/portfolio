@@ -30,7 +30,12 @@ class TechStack extends StatelessWidget {
                     )
                   : null,
             ),
-            child: AppImage(techList[index]),
+            child: AppImage(
+              techList[index],
+              colorFilter: techList[index].contains("flask")
+                  ? ColorFilter.mode(textLightColor, BlendMode.srcATop)
+                  : null,
+            ),
           ),
         ),
       ),

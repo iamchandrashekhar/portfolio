@@ -21,15 +21,15 @@ class Contact extends StatelessWidget {
         ),
       ),
       constraints: BoxConstraints(minHeight: 90.h),
-      child: const ResponsiveWidget(
-        mobile: _MobileAndTablet(),
-        tablet: _MobileAndTablet(),
+      child: ResponsiveWidget(
+        mobile: const _MobileAndTablet(),
+        tablet: const _MobileAndTablet(),
         desktop: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
+            const Expanded(
               child: ContactDetails(
                 crossAxisAlignment: CrossAxisAlignment.start,
               ),
@@ -58,7 +58,7 @@ class _MobileAndTablet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
         ),
         heightBox(40),
-        const ContactForm()
+        ContactForm()
       ],
     );
   }

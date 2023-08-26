@@ -105,7 +105,7 @@ class _CardWidget extends StatelessWidget {
               children: [
                 TechStack(techList: techStack),
                 SourceCodeLink(
-                  icon: AppImagesSource.githubIcon,
+                  icon: AppImagesSource.githubCircleIcon,
                   link: link,
                 )
               ],

@@ -4,10 +4,13 @@ import 'package:portfolio/src/screens/contact/send_button.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/theme/theme_constant.dart';
 
+// ignore: must_be_immutable
 class ContactForm extends StatelessWidget {
-  const ContactForm({
+  ContactForm({
     super.key,
   });
+
+  Map<String, String> formData = {};
 
   @override
   Widget build(BuildContext context) {
@@ -42,72 +45,78 @@ class ContactForm extends StatelessWidget {
           heightBox(20),
           SizedBox(
             width: 130,
-            child: SendButton(formKey: formKey),
+            child: SendButton(
+              formKey: formKey,
+              formData: formData,
+            ),
           )
         ],
       ),
     );
   }
-}
 
-Widget getTextField(
-  BuildContext context, {
-  int maxLines = 1,
-  int minLines = 1,
-  required String hintText,
-  bool isEmail = false,
-}) {
-  final theme = Theme.of(context);
-  return TextFormField(
-    maxLines: maxLines,
-    minLines: minLines,
-    onChanged: (value) {},
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    validator: (value) => (value ?? "").isEmpty
-        ? "Required"
-        : isEmail
-            ? RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$').hasMatch(value ?? "")
-                ? null
-                : "Invalid Email"
-            : null,
-    decoration: InputDecoration(
-      filled: true,
-      fillColor: theme.colorScheme.onBackground,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: theme.colorScheme.onBackground),
-        borderRadius:
-            const BorderRadius.all(Radius.circular(defaultRadius * 2)),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(color: getColor(light: lightGrey, dark: darkGrey)),
-        borderRadius:
-            const BorderRadius.all(Radius.circular(defaultRadius * 2)),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: theme.colorScheme.secondary),
-        borderRadius:
-            const BorderRadius.all(Radius.circular(defaultRadius * 2)),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: theme.colorScheme.secondary),
-        borderRadius:
-            const BorderRadius.all(Radius.circular(defaultRadius * 2)),
-      ),
-      errorStyle: theme.textTheme.bodySmall!
-          .copyWith(color: theme.colorScheme.secondary),
-      hintText: hintText,
-      hintStyle: TextStyle(
-        color: getColor(
-          light: darkGrey.withOpacity(0.4),
-          dark: lightGrey.withOpacity(0.4),
+  Widget getTextField(
+    BuildContext context, {
+    int maxLines = 1,
+    int minLines = 1,
+    required String hintText,
+    bool isEmail = false,
+  }) {
+    final theme = Theme.of(context);
+    return TextFormField(
+      maxLines: maxLines,
+      minLines: minLines,
+      onChanged: (value) {
+        formData[hintText] = value;
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) => (value ?? "").isEmpty
+          ? "Required"
+          : isEmail
+              ? RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
+                      .hasMatch(value ?? "")
+                  ? null
+                  : "Invalid Email"
+              : null,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: theme.colorScheme.onBackground,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.onBackground),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(defaultRadius * 2)),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: getColor(light: lightGrey, dark: darkGrey)),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(defaultRadius * 2)),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.secondary),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(defaultRadius * 2)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.secondary),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(defaultRadius * 2)),
+        ),
+        errorStyle: theme.textTheme.bodySmall!
+            .copyWith(color: theme.colorScheme.secondary),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: getColor(
+            light: darkGrey.withOpacity(0.4),
+            dark: lightGrey.withOpacity(0.4),
+          ),
+        ),
+        // errorText: "Invalid",
+        hoverColor: Colors.transparent,
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: 24, vertical: defaultPadding * 1.5),
       ),
-      // errorText: "Invalid",
-      hoverColor: Colors.transparent,
-      contentPadding: const EdgeInsets.symmetric(
-          horizontal: 24, vertical: defaultPadding * 1.5),
-    ),
-    cursorColor: theme.textTheme.bodyLarge!.color,
-  );
+      cursorColor: theme.textTheme.bodyLarge!.color,
+    );
+  }
 }

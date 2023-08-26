@@ -4,6 +4,7 @@ import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/models/image_model.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_constant.dart';
+import 'package:url_launcher/link.dart';
 
 class ContactDetails extends StatelessWidget {
   const ContactDetails({super.key, required this.crossAxisAlignment});
@@ -14,7 +15,7 @@ class ContactDetails extends StatelessWidget {
     final theme = Theme.of(context);
     final txt = theme.textTheme;
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: crossAxisAlignment,
       children: [
         Text(
@@ -48,16 +49,42 @@ class ContactCard extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: details.length,
-      itemBuilder: (context, index) => Row(
-        children: [
-          AppImage(details[index].svgSource),
-          widthBox(defaultPadding),
-          Text(
-            details[index].title ?? "",
-            style: txt.titleMedium,
-          )
-        ],
-      ),
+      itemBuilder: (context, index) {
+        late Uri uri;
+        if (RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
+            .hasMatch(details[index].link!)) {
+          uri = Uri(scheme: "mailto", path: details[index].link!);
+        } else {
+          uri = Uri(scheme: "https", path: details[index].link!);
+        }
+
+        return Link(
+          uri: uri,
+          target: LinkTarget.blank,
+          builder: (context, followLink) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: followLink,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppImage(details[index].svgSource),
+                    widthBox(defaultPadding),
+                    Text(
+                      (details[index].title ?? ""),
+                      style: txt.titleMedium,
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

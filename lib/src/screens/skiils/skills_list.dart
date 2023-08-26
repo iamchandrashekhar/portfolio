@@ -57,8 +57,7 @@ class SkillsCard extends StatelessWidget {
                 height: size,
                 colorFilter: image.contains("flask")
                     ? ColorFilter.mode(txt.bodyLarge!.color!, BlendMode.srcATop)
-                    : const ColorFilter.mode(
-                        Colors.transparent, BlendMode.clear),
+                    : null,
               ),
               heightBox(defaultPadding * 1.5),
               Text(
