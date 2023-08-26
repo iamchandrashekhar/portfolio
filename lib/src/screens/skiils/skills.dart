@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/skiils/skills_list.dart';
 import 'package:portfolio/src/utils/responsive.dart';
@@ -28,6 +29,10 @@ class Skills extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            ResponsiveWidget(
+              mobile: heightBox(40),
+              tablet: heightBox(40),
+            ),
             Text(
               AppValue.skills,
               style: txt.displayLarge!.copyWith(

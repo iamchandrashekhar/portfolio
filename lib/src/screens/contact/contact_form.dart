@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common_widgets/responsive_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
 import 'package:portfolio/src/screens/contact/send_button.dart';
 import 'package:portfolio/src/utils/responsive.dart';
@@ -49,7 +50,11 @@ class ContactForm extends StatelessWidget {
               formKey: formKey,
               formData: formData,
             ),
-          )
+          ),
+          ResponsiveWidget(
+            mobile: heightBox(40),
+            tablet: heightBox(40),
+          ),
         ],
       ),
     );

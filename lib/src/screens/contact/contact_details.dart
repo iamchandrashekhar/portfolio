@@ -46,6 +46,7 @@ class ContactCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final txt = Theme.of(context).textTheme;
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: details.length,
       itemBuilder: (context, index) {
