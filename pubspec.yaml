@@ -76,6 +76,8 @@ flutter:
     - assets/images/socials/
     - assets/images/tech_badges/
     - assets/images/blob/
+    # create .env file on root of project and add firebase config to .env
+    # also add collection name to collect response used in contact_provider.dart
     - .env
     
     # - images/a_dot_ham.jpeg

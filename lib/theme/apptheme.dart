@@ -10,6 +10,8 @@ ThemeData getThemeData({required bool isLightTheme}) {
   return ThemeData(
     brightness: isLightTheme ? Brightness.light : Brightness.dark,
     useMaterial3: material3,
+    textSelectionTheme:
+        TextSelectionThemeData(selectionColor: redColor.withOpacity(0.4)),
     appBarTheme:
         AppBarTheme(backgroundColor: isLightTheme ? bgLightColor : bgDarkColor),
     colorScheme: getColorScheme(isLightTheme: isLightTheme),
