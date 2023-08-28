@@ -38,16 +38,32 @@
 
   <title>Chandrashekhar's Portfolio</title>
   <link rel="manifest" href="manifest.json">
-
   <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
 </head>
 
-<body>
+<body style="overflow: hidden;">
+  <style>
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .indicator {
+      width: 50vw;
+    }
+  </style>
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/loader.gif">
+  </div>
   <script>
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
@@ -62,6 +78,16 @@
         }
       });
     });
+  </script>
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        var indicator = document.getElementById('loading_indicator');
+        if (indicator) {
+          indicator.remove();
+        }
+      }, 10000)
+    }
   </script>
 </body>
 
