@@ -28,7 +28,7 @@ class Skills extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
