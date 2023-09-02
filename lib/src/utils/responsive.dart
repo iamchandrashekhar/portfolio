@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
+import 'package:portfolio/src/utils/global_context.dart';
 import 'package:portfolio/theme/theme_widget.dart';
 import 'package:provider/provider.dart';
 

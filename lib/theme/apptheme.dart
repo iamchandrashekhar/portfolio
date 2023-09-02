@@ -1,5 +1,6 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/theme/theme_constant.dart';
 
 ThemeData lightTheme = getThemeData(isLightTheme: true);
@@ -39,27 +40,86 @@ ColorScheme getColorScheme({required bool isLightTheme}) {
 
 TextTheme getTextTheme({required bool isLightTheme}) {
   final color = isLightTheme ? textLightColor : textDarkColor;
-  return GoogleFonts.outfitTextTheme(
-    TextTheme(
-      displayLarge: TextStyle(color: color),
-      displayMedium: TextStyle(color: color),
-      displaySmall: TextStyle(color: color),
-      //
-      headlineLarge: TextStyle(color: color),
-      headlineMedium: TextStyle(color: color),
-      headlineSmall: TextStyle(color: color),
-      //
-      titleLarge: TextStyle(color: color),
-      titleMedium: TextStyle(color: color),
-      titleSmall: TextStyle(color: color),
-      //
-      labelLarge: TextStyle(color: color),
-      labelMedium: TextStyle(color: color),
-      labelSmall: TextStyle(color: color),
-      //
-      bodyLarge: TextStyle(color: color),
-      bodyMedium: TextStyle(color: color),
-      bodySmall: TextStyle(color: color),
+
+  return TextTheme(
+    displayLarge: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    displayMedium: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    displaySmall: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    //
+    headlineLarge: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    headlineMedium: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    headlineSmall: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    //
+    titleLarge: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    titleMedium: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    titleSmall: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    //
+    labelLarge: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    labelMedium: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    labelSmall: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    //
+    bodyLarge: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
+    ),
+    bodySmall: TextStyle(
+      fontFamily: "Outfit",
+      color: color,
+      fontVariations: const [FontVariation('wght', 400)],
     ),
   );
 }

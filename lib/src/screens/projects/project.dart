@@ -38,7 +38,6 @@ class ProjectBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return LayoutBuilder(builder: (context, constraint) {
       return Padding(
         padding: EdgeInsets.symmetric(
@@ -48,26 +47,30 @@ class ProjectBody extends StatelessWidget {
             defaultPadding * 3,
           ),
         ),
-        child: ResponsiveWidget(
-          mobile: const _MobileAndTablet(),
-          tablet: const _MobileAndTablet(),
-          desktop: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.65,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: headingAndBody(theme: theme),
+        child: Center(
+          child: ResponsiveWidget(
+            mobile: const _MobileAndTablet(),
+            tablet: const _MobileAndTablet(),
+            desktop: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.65,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: headingAndBody(theme: theme),
+                      ),
+                    ),
                   ),
-                ),
+                  const ProjectCards(),
+                ],
               ),
-              const ProjectCards(),
-            ],
+            ),
           ),
         ),
       );
@@ -108,21 +111,25 @@ class _MobileAndTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: headingAndBody(theme: theme),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          heightBox(40),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: headingAndBody(theme: theme),
+            ),
           ),
-        ),
-        const ProjectCards(),
-      ],
+          const ProjectCards(),
+          heightBox(20),
+        ],
+      ),
     );
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "891298719417",
+    "project_id": "thechandu-portfolio",
+    "storage_bucket": "thechandu-portfolio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891298719417:android:baff0ea4d43d19148f1d68",
+        "android_client_info": {
+          "package_name": "com.example.portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891298719417-d6udf49pv2iignrig85auu0hg1j3oon5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhvd3RYJQtPEuAIV-93e3iLyPFr8VnZ24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891298719417-d6udf49pv2iignrig85auu0hg1j3oon5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

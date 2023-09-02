@@ -1,14 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/responsive_widget.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
+import 'package:portfolio/src/common_widgets/spacer.dart';
+import 'package:portfolio/src/utils/global_context.dart';
 import 'package:portfolio/src/screens/landing/headers.dart';
 import 'package:portfolio/src/screens/landing/theme_toggle.dart';
 import 'package:portfolio/src/utils/responsive.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
-import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -19,89 +17,23 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
+  late TabController tabController;
   final pages = AppValue.pages;
-  ScrollController scrollController = ScrollController();
 
-  // Global keys only for getting widget's size
-  // So we can scroll to specific widget and update top nav bar index
-  List<GlobalKey> globalKeys = [];
-  List<double> widgetsHeight = [];
-  List<double> heightSum = [];
-  bool isAnimating = false;
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
+  void onTap(int i) {
+    tabController.animateTo(i, duration: fast);
   }
 
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(updateHeaderWhileScroll);
-
-    // We get size of each widget using global keys after widget build
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      getWidgetSize();
-    });
+    tabController = TabController(length: pages.length, vsync: this);
   }
 
-  /// Getting each widget size with global keys attach to them
-  void getWidgetSize() {
-    for (int i = 0; i < globalKeys.length; i++) {
-      widgetsHeight.add(globalKeys[i].currentContext!.size!.height);
-      heightSum.add(widgetsHeight.fold<double>(0, (v, e) => v + e));
-    }
-  }
-
-  /// Calculate scrolling offset when we navigate through nav bar
-  double calculatePosition(int index) {
-    double position = widgetsHeight
-        .sublist(0, index)
-        .fold<double>(0, (previousValue, element) => previousValue + element);
-    double scrollTo = min(scrollController.position.maxScrollExtent, position);
-    return scrollTo;
-  }
-
-  /// Calculate offset and update index for nav bar indicator
-  void updateHeaderWhileScroll() {
-    if (!isAnimating) {
-      double offset = scrollController.offset;
-      if (offset < scrollController.position.maxScrollExtent) {
-        int i = 0;
-        for (i; i < heightSum.length; i++) {
-          if (offset < heightSum[i]) {
-            break;
-          }
-        }
-        double pos = offset - (heightSum[i] - widgetsHeight[i]);
-        pos = pos / widgetsHeight[i];
-        if (pos > 0.8) {
-          i++;
-        }
-        context.read<LandingProvider>().updateHeaderIndex(i);
-      } else {
-        context
-            .read<LandingProvider>()
-            .updateHeaderIndex(widgetsHeight.length - 1);
-      }
-    }
-  }
-
-  /// Method to scroll to specific widget
-  void onTap(int index) {
-    isAnimating = true;
-    setState(() {});
-
-    context.read<LandingProvider>().updateHeaderIndex(index);
-    scrollController
-        .animateTo(calculatePosition(index),
-            duration: fast, curve: Curves.bounceInOut)
-        .then((value) {
-      setState(() {
-        isAnimating = false;
-      });
-    });
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -113,38 +45,53 @@ class _LandingPageState extends State<LandingPage>
             ? AppBar(
                 elevation: 4,
                 shadowColor: Colors.black38,
+                centerTitle: false,
                 title: const Padding(
                   padding: EdgeInsets.only(left: defaultPadding),
                   child: TitleWidget(),
                 ),
                 actions: [
-                  Header(
-                    horizontal: true,
-                    onTap: onTap,
-                  ),
                   const Padding(
-                    padding: EdgeInsets.only(right: defaultPadding * 3),
+                    padding: EdgeInsets.only(right: defaultPadding),
                     child: ThemeToggle(),
                   ),
+                  Builder(
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        child: const Icon(Icons.menu_outlined),
+                      );
+                    },
+                  ),
+                  widthBox(defaultPadding * 2),
                 ],
               )
             : null,
-        bottomNavigationBar: ResponsiveWidget(
-          tablet: BottomNavigation(onTap: onTap),
-          mobile: BottomNavigation(onTap: onTap),
+        endDrawer: Drawer(
+          surfaceTintColor: Colors.white,
+          child: Menu(
+            tabController: tabController,
+            onTap: onTap,
+          ),
         ),
-        body: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: List.generate(
-              pages.length,
-              (index) {
-                final key = GlobalKey<_LandingPageState>();
-                globalKeys.add(key);
-                return SizedBox(key: key, child: pages[index].widget);
-              },
-              growable: false,
-            ),
+        endDrawerEnableOpenDragGesture: true,
+        bottomNavigationBar: ResponsiveWidget(
+          tablet: BottomNavigation(
+            onTap: onTap,
+            tabController: tabController,
+          ),
+          mobile: BottomNavigation(
+            onTap: onTap,
+            tabController: tabController,
+          ),
+        ),
+        body: TabBarView(
+          controller: tabController,
+          children: List.generate(
+            pages.length,
+            (index) => pages[index].widget,
           ),
         ),
       ),
@@ -164,11 +111,11 @@ class TitleWidget extends StatelessWidget {
         text: TextSpan(
           children: const [
             TextSpan(
-              text: "CHANDRASHEKHAR ",
+              text: AppValue.name,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             TextSpan(
-              text: "PANWAR",
+              text: AppValue.surname,
             ),
           ],
           style: txt.titleLarge,
@@ -182,8 +129,10 @@ class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
     Key? key,
     required this.onTap,
+    required this.tabController,
   }) : super(key: key);
   final ValueSetter<int> onTap;
+  final TabController tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -202,10 +151,12 @@ class BottomNavigation extends StatelessWidget {
             padding: EdgeInsets.only(right: defaultPadding),
             child: ThemeToggle(),
           ),
-          Header(
-            horizontal: false,
+          Menu(
             onTap: onTap,
-          )
+            tabController: tabController,
+            isDesktop: false,
+          ),
+          widthBox(defaultPadding)
         ],
       ),
     );

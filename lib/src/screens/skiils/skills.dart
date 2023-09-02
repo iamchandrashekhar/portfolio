@@ -17,6 +17,7 @@ class Skills extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       constraints: BoxConstraints(minHeight: 80.h),
+      alignment: Alignment.centerLeft,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: responsiveValues<double>(
@@ -25,26 +26,28 @@ class Skills extends StatelessWidget {
             defaultPadding * 3,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ResponsiveWidget(
-              mobile: heightBox(40),
-              tablet: heightBox(40),
-            ),
-            Text(
-              AppValue.skills,
-              style: txt.displayLarge!.copyWith(
-                color: theme.colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ResponsiveWidget(
+                mobile: heightBox(40),
+                tablet: heightBox(40),
               ),
-              // textAlign: txtAlign,
-            ),
-            heightBox(defaultPadding),
-            const SkillsList(),
-            heightBox(defaultPadding),
-          ],
+              Text(
+                AppValue.skills,
+                style: txt.displayLarge!.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
+                ),
+                // textAlign: txtAlign,
+              ),
+              heightBox(defaultPadding),
+              const SkillsList(),
+              heightBox(defaultPadding),
+            ],
+          ),
         ),
       ),
     );

@@ -23,12 +23,16 @@ class HomePage extends StatelessWidget {
       child: ResponsiveWidget(
         mobile: const _MobileAndTablet(),
         tablet: const _MobileAndTablet(),
-        desktop: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: introList(textAlign: TextAlign.center, txt: txt),
+        desktop: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: introList(textAlign: TextAlign.center, txt: txt),
+              ),
+            ),
           ),
         ),
       ),
@@ -103,8 +107,7 @@ class _MobileAndTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final txt = Theme.of(context).textTheme;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return ListView(
       children: [
         heightBox(defaultPadding * 3),
         Column(

@@ -1,121 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/image_widget.dart';
 import 'package:portfolio/src/common_widgets/spacer.dart';
-import 'package:portfolio/src/models/page_model.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:portfolio/src/utils/values.dart';
 import 'package:portfolio/theme/theme_widget.dart';
-import 'package:provider/provider.dart';
 
-class Header extends StatelessWidget {
-  const Header({
+class Menu extends StatelessWidget {
+  const Menu({
     super.key,
     required this.onTap,
-    this.horizontal = true,
+    required this.tabController,
+    this.isDesktop = true,
   });
 
   final ValueChanged<int> onTap;
-  final bool horizontal;
+  final TabController tabController;
+  final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
-    return horizontal ? _Horizontal(onTap: onTap) : AnimatedMenu(onTap: onTap);
+    return isDesktop
+        ? DrawerMenu(
+            tabController: tabController,
+            onTap: onTap,
+          )
+        : BottomSheetMenu(
+            onTap: onTap,
+            tabController: tabController,
+          );
   }
 }
 
-class _Horizontal extends StatelessWidget {
-  const _Horizontal({
+class DrawerMenu extends StatefulWidget {
+  const DrawerMenu({
+    super.key,
     required this.onTap,
+    required this.tabController,
   });
 
   final ValueChanged<int> onTap;
+  final TabController tabController;
 
+  @override
+  State<DrawerMenu> createState() => _DrawerMenuState();
+}
+
+class _DrawerMenuState extends State<DrawerMenu> {
   @override
   Widget build(BuildContext context) {
     final pages = AppValue.pages;
-    return Selector<LandingProvider, int>(
-      selector: (_, provider) => provider.headerIndex,
-      builder: (context, header, _) {
-        return Row(
-          children: List.generate(
-            pages.length,
-            (index) {
-              return _HeaderTile(
-                onTap: onTap,
-                pages: pages,
-                header: header,
-                index: index,
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _HeaderTile extends StatefulWidget {
-  const _HeaderTile({
-    required this.header,
-    required this.index,
-    required this.onTap,
-    required this.pages,
-  });
-  final int header;
-  final int index;
-  final ValueChanged<int> onTap;
-  final List<PageModel> pages;
-
-  @override
-  State<_HeaderTile> createState() => _HeaderTileState();
-}
-
-class _HeaderTileState extends State<_HeaderTile> {
-  bool isHovering = false;
-  @override
-  Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return InkWell(
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      onHover: (value) {
-        isHovering = value;
-        setState(() {});
-      },
-      onTap: () => widget.onTap.call(widget.index),
-      child: AnimatedContainer(
-        duration: fast,
-        margin: const EdgeInsets.only(right: defaultPadding),
-        padding: const EdgeInsets.symmetric(
-            horizontal: defaultPadding * 1.5, vertical: defaultPadding / 2),
-        decoration: BoxDecoration(
-          color: widget.header == widget.index
-              ? theme.colorScheme.secondary
-              : isHovering
-                  ? theme.colorScheme.secondary.withOpacity(0.2)
-                  : Colors.transparent,
-          borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
-        ),
-        child: Text(
-          widget.pages[widget.index].name,
-          style: theme.textTheme.titleMedium!.copyWith(
-            color: widget.header == widget.index ? textDarkColor : null,
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topLeft,
+          child: GestureDetector(
+            onTap: Scaffold.of(context).closeEndDrawer,
+            child: Container(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: const Icon(Icons.close),
+            ),
           ),
         ),
-      ),
+        heightBox(20),
+        ...List.generate(
+          pages.length,
+          (index) => InkWell(
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () {
+              widget.onTap.call(index);
+              setState(() {});
+            },
+            child: AnimatedContainer(
+              duration: fast,
+              margin: const EdgeInsets.only(right: defaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: defaultPadding * 1.5,
+                  vertical: defaultPadding / 2),
+              child: Text(
+                pages[index].name,
+                style: theme.textTheme.titleMedium!.copyWith(
+                  color: widget.tabController.index == index
+                      ? theme.colorScheme.secondary
+                      : null,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
 
-class AnimatedMenu extends StatefulWidget {
-  const AnimatedMenu({super.key, required this.onTap});
+class BottomSheetMenu extends StatefulWidget {
+  const BottomSheetMenu(
+      {super.key, required this.onTap, required this.tabController});
   final ValueChanged<int> onTap;
+  final TabController tabController;
   @override
-  State<AnimatedMenu> createState() => _AnimatedMenuState();
+  State<BottomSheetMenu> createState() => _BottomSheetMenuState();
 }
 
-class _AnimatedMenuState extends State<AnimatedMenu>
+class _BottomSheetMenuState extends State<BottomSheetMenu>
     with SingleTickerProviderStateMixin {
   bool menuOpen = false;
   late AnimationController animationController;
@@ -136,6 +124,8 @@ class _AnimatedMenuState extends State<AnimatedMenu>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final pages = AppValue.pages;
     return GestureDetector(
       onTap: () {
         if (menuOpen) {
@@ -146,86 +136,76 @@ class _AnimatedMenuState extends State<AnimatedMenu>
         menuOpen = !menuOpen;
         showModalBottomSheet(
           context: context,
-          builder: (context) => _Grid(
-            onTap: widget.onTap,
-          ),
+          builder: (context) {
+            return Padding(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: StatefulBuilder(builder: (context, chState) {
+                      return Wrap(
+                        children: List.generate(
+                          pages.length,
+                          (index) => GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () {
+                              widget.onTap(index);
+                              chState(() {});
+                            },
+                            child: AnimatedContainer(
+                              width: 100,
+                              height: 80,
+                              duration: fast,
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(defaultPadding / 2),
+                              padding: const EdgeInsets.all(defaultPadding / 2),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppImage(
+                                    pages[index].svgPath,
+                                    width: 24,
+                                    height: 24,
+                                    colorFilter: ColorFilter.mode(
+                                      widget.tabController.index == index
+                                          ? theme.colorScheme.secondary
+                                          : theme.textTheme.bodyLarge!.color!,
+                                      BlendMode.srcATop,
+                                    ),
+                                  ),
+                                  heightBox(8),
+                                  Text(
+                                    pages[index].name,
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                      color: widget.tabController.index == index
+                                          ? theme.colorScheme.secondary
+                                          : null,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  heightBox(defaultPadding),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(Icons.close),
+                  )
+                ],
+              ),
+            );
+          },
           transitionAnimationController: animationController,
         );
       },
       child: AnimatedIcon(
         icon: AnimatedIcons.menu_close,
         progress: animation,
-      ),
-    );
-  }
-}
-
-class _Grid extends StatelessWidget {
-  _Grid({required this.onTap});
-  final ValueChanged<int> onTap;
-  final pages = AppValue.pages;
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(defaultPadding),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            child: Selector<LandingProvider, int>(
-              selector: (_, provider) => provider.headerIndex,
-              builder: (context, header, _) {
-                return Wrap(
-                  children: List.generate(
-                    pages.length,
-                    (index) => GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => onTap(index),
-                      child: AnimatedContainer(
-                        width: 100,
-                        height: 80,
-                        duration: fast,
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.all(defaultPadding / 2),
-                        padding: const EdgeInsets.all(defaultPadding / 2),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AppImage(
-                              pages[index].svgPath,
-                              width: 24,
-                              height: 24,
-                              colorFilter: ColorFilter.mode(
-                                header == index
-                                    ? theme.colorScheme.secondary
-                                    : theme.textTheme.bodyLarge!.color!,
-                                BlendMode.srcATop,
-                              ),
-                            ),
-                            heightBox(8),
-                            Text(
-                              pages[index].name,
-                              style: theme.textTheme.bodyMedium!.copyWith(
-                                color: header == index
-                                    ? theme.colorScheme.secondary
-                                    : null,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          heightBox(defaultPadding),
-          GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(Icons.close))
-        ],
       ),
     );
   }

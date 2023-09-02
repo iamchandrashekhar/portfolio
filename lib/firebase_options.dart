@@ -22,10 +22,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -53,9 +50,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-// Create .env file in root of project and define variables
-// as per your firebase config in that file
-
   static FirebaseOptions web = FirebaseOptions(
     apiKey: dotenv.env['apiKey']!,
     appId: dotenv.env['appId']!,
@@ -64,5 +58,13 @@ class DefaultFirebaseOptions {
     authDomain: dotenv.env['authDomain']!,
     storageBucket: dotenv.env['storageBucket']!,
     measurementId: dotenv.env['measurementId']!,
+  );
+
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['androidApiKey']!,
+    appId: dotenv.env['androidAppId']!,
+    messagingSenderId: dotenv.env['messagingSenderId']!,
+    projectId: dotenv.env['projectId']!,
+    storageBucket: dotenv.env['storageBucket']!,
   );
 }

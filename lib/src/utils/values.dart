@@ -8,6 +8,8 @@ import 'package:portfolio/src/models/image_model.dart';
 import 'package:portfolio/src/utils/assets_list.dart';
 
 class AppValue {
+  static const name = "CHANDRASHEKHAR ";
+  static const surname = "PANWAR";
   static List<PageModel> pages = [
     PageModel(
         name: 'Home',

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:portfolio/firebase_options.dart';
 import 'package:portfolio/src/provider/contact_provider.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/src/screens/landing/landing.dart';
 import 'package:portfolio/theme/theme_widget.dart';
@@ -15,7 +14,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: ((context) => ThemeManager())),
-    ChangeNotifierProvider(create: ((context) => LandingProvider())),
     ChangeNotifierProvider(create: ((context) => ContactProvider())),
   ], child: const MyApp()));
 }

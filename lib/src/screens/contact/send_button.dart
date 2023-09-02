@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common_widgets/snack_bar.dart';
 import 'package:portfolio/src/provider/contact_provider.dart';
-import 'package:portfolio/src/provider/landing_provider.dart';
+import 'package:portfolio/src/utils/global_context.dart';
 import 'package:portfolio/theme/theme_constant.dart';
 import 'package:provider/provider.dart';
 
