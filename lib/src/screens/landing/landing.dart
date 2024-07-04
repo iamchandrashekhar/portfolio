@@ -39,6 +39,7 @@ class _LandingPageState extends State<LandingPage>
   @override
   Widget build(BuildContext context) {
     setContext(context);
+    final theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
         appBar: isDesktop(MediaQuery.of(context).size.width)
@@ -61,7 +62,10 @@ class _LandingPageState extends State<LandingPage>
                         onTap: () {
                           Scaffold.of(context).openEndDrawer();
                         },
-                        child: const Icon(Icons.menu_outlined),
+                        child: Icon(
+                          Icons.menu_outlined,
+                          color: theme.iconTheme.color,
+                        ),
                       );
                     },
                   ),
@@ -127,10 +131,10 @@ class TitleWidget extends StatelessWidget {
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.tabController,
-  }) : super(key: key);
+  });
   final ValueSetter<int> onTap;
   final TabController tabController;
 

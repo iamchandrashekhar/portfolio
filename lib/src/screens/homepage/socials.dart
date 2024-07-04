@@ -40,7 +40,7 @@ class Social extends StatelessWidget {
             padding: const EdgeInsets.all(defaultPadding),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(defaultRadius),
                 ),

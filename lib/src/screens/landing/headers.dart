@@ -57,7 +57,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             onTap: Scaffold.of(context).closeEndDrawer,
             child: Container(
               padding: const EdgeInsets.all(defaultPadding),
-              child: const Icon(Icons.close),
+              child: Icon(Icons.close, color: theme.iconTheme.color),
             ),
           ),
         ),
@@ -194,7 +194,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu>
                   heightBox(defaultPadding),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.close),
+                    child: Icon(Icons.close, color: theme.iconTheme.color),
                   )
                 ],
               ),

@@ -25,7 +25,7 @@ class TechBadge extends StatelessWidget {
       // padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: theme.colorScheme.onBackground,
+        color: theme.colorScheme.onSurface,
       ),
       child: AppImage(
         svgPath,

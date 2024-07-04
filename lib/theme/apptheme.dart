@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:portfolio/theme/theme_constant.dart';
 
@@ -19,22 +17,28 @@ ThemeData getThemeData({required bool isLightTheme}) {
     scaffoldBackgroundColor: isLightTheme ? bgLightColor : bgDarkColor,
     textTheme: getTextTheme(isLightTheme: isLightTheme),
     elevatedButtonTheme: getElevatedBtnThm(),
+    iconTheme: getIconThemeData(isLightTheme: isLightTheme),
   );
+}
+
+IconThemeData getIconThemeData({required bool isLightTheme}) {
+  final color = isLightTheme ? textLightColor : textDarkColor;
+  return IconThemeData(color: color);
 }
 
 ColorScheme getColorScheme({required bool isLightTheme}) {
   return isLightTheme
       ? ColorScheme.light(
           primary: bgLightColor,
-          background: bgLightColor,
+          surface: bgLightColor,
           secondary: redColor,
-          onBackground: socialBgLight,
+          onSurface: socialBgLight,
         )
       : ColorScheme.dark(
           primary: bgDarkColor,
-          background: bgDarkColor,
+          surface: bgDarkColor,
           secondary: redColor,
-          onBackground: socialBgDark,
+          onSurface: socialBgDark,
         );
 }
 
@@ -127,18 +131,18 @@ TextTheme getTextTheme({required bool isLightTheme}) {
 ElevatedButtonThemeData getElevatedBtnThm() {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStatePropertyAll(redColor),
-      foregroundColor: MaterialStatePropertyAll(textDarkColor),
-      overlayColor: MaterialStatePropertyAll(redColor),
+      backgroundColor: WidgetStatePropertyAll(redColor),
+      foregroundColor: WidgetStatePropertyAll(textDarkColor),
+      overlayColor: WidgetStatePropertyAll(redColor),
       visualDensity: VisualDensity.standard,
-      shape: const MaterialStatePropertyAll(
+      shape: const WidgetStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(defaultRadius * 2),
           ),
         ),
       ),
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
         const EdgeInsets.symmetric(
           vertical: defaultPadding,
           horizontal: defaultPadding * 1.5,

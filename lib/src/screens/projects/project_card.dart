@@ -55,7 +55,7 @@ class _CardWidget extends StatelessWidget {
       height: size,
       padding: const EdgeInsets.all(defaultPadding * 2),
       decoration: BoxDecoration(
-        color: theme.colorScheme.onBackground,
+        color: theme.colorScheme.onSurface,
         borderRadius: const BorderRadius.all(
           Radius.circular(defaultRadius * 3),
         ),

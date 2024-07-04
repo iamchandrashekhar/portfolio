@@ -7,6 +7,7 @@ class ThemeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     bool lightMode = context.select<ThemeManager, bool>(
       (p) => !p.isDark(),
     );
@@ -29,15 +30,17 @@ class ThemeToggle extends StatelessWidget {
             );
           },
           child: lightMode
-              ? const Icon(
+              ? Icon(
                   Icons.sunny,
-                  key: ValueKey('Sun'),
+                  key: const ValueKey('Sun'),
                   size: 30,
+                  color: theme.iconTheme.color,
                 )
-              : const Icon(
+              : Icon(
                   Icons.dark_mode,
-                  key: ValueKey('Moon'),
+                  key: const ValueKey('Moon'),
                   size: 30,
+                  color: theme.iconTheme.color,
                 ),
         ),
       ),

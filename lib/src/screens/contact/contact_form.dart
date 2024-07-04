@@ -85,9 +85,9 @@ class ContactForm extends StatelessWidget {
               : null,
       decoration: InputDecoration(
         filled: true,
-        fillColor: theme.colorScheme.onBackground,
+        fillColor: theme.colorScheme.onSurface,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: theme.colorScheme.onBackground),
+          borderSide: BorderSide(color: theme.colorScheme.onSurface),
           borderRadius:
               const BorderRadius.all(Radius.circular(defaultRadius * 2)),
         ),
