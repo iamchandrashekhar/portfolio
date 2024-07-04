@@ -41,61 +41,67 @@ class _LandingPageState extends State<LandingPage>
     setContext(context);
     final theme = Theme.of(context);
     return SafeArea(
-      child: Scaffold(
-        appBar: isDesktop(MediaQuery.of(context).size.width)
-            ? AppBar(
-                elevation: 4,
-                shadowColor: Colors.black38,
-                centerTitle: false,
-                title: const Padding(
-                  padding: EdgeInsets.only(left: defaultPadding),
-                  child: TitleWidget(),
-                ),
-                actions: [
-                  const Padding(
-                    padding: EdgeInsets.only(right: defaultPadding),
-                    child: ThemeToggle(),
+      child: SelectionArea(
+        child: Scaffold(
+          appBar: isDesktop(MediaQuery.of(context).size.width)
+              ? AppBar(
+                  elevation: 4,
+                  shadowColor: Colors.black38,
+                  centerTitle: false,
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: defaultPadding),
+                    child: TitleWidget(
+                      onTap: () {
+                        tabController.animateTo(0);
+                      },
+                    ),
                   ),
-                  Builder(
-                    builder: (context) {
-                      return GestureDetector(
-                        onTap: () {
-                          Scaffold.of(context).openEndDrawer();
-                        },
-                        child: Icon(
-                          Icons.menu_outlined,
-                          color: theme.iconTheme.color,
-                        ),
-                      );
-                    },
-                  ),
-                  widthBox(defaultPadding * 2),
-                ],
-              )
-            : null,
-        endDrawer: Drawer(
-          surfaceTintColor: Colors.white,
-          child: Menu(
-            tabController: tabController,
-            onTap: onTap,
+                  actions: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: defaultPadding),
+                      child: ThemeToggle(),
+                    ),
+                    Builder(
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                          child: Icon(
+                            Icons.menu_outlined,
+                            color: theme.iconTheme.color,
+                          ),
+                        );
+                      },
+                    ),
+                    widthBox(defaultPadding * 2),
+                  ],
+                )
+              : null,
+          endDrawer: Drawer(
+            surfaceTintColor: Colors.white,
+            child: Menu(
+              tabController: tabController,
+              onTap: onTap,
+            ),
           ),
-        ),
-        endDrawerEnableOpenDragGesture: true,
-        bottomNavigationBar: ResponsiveWidget(
-          tablet: BottomNavigation(
-            onTap: onTap,
-            tabController: tabController,
+          endDrawerEnableOpenDragGesture: true,
+          bottomNavigationBar: ResponsiveWidget(
+            tablet: BottomNavigation(
+              onTap: onTap,
+              tabController: tabController,
+            ),
+            mobile: BottomNavigation(
+              onTap: onTap,
+              tabController: tabController,
+            ),
           ),
-          mobile: BottomNavigation(
-            onTap: onTap,
-            tabController: tabController,
-          ),
-        ),
-        body: TabBarView(
-          controller: tabController,
-          children: List.generate(
-            pages.length,
-            (index) => pages[index].widget,
+          body: TabBarView(
+            controller: tabController,
+            children: List.generate(
+              pages.length,
+              (index) => pages[index].widget,
+            ),
           ),
         ),
       ),
@@ -104,15 +110,16 @@ class _LandingPageState extends State<LandingPage>
 }
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({super.key});
+  const TitleWidget({super.key, required this.onTap});
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final txt = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-      child: RichText(
-        text: TextSpan(
+      child: SelectableText.rich(
+        TextSpan(
           children: const [
             TextSpan(
               text: AppValue.name,
@@ -124,6 +131,7 @@ class TitleWidget extends StatelessWidget {
           ],
           style: txt.titleLarge,
         ),
+        onTap: onTap,
       ),
     );
   }
@@ -144,11 +152,15 @@ class BottomNavigation extends StatelessWidget {
       height: kToolbarHeight,
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: FittedBox(
               fit: BoxFit.scaleDown,
               alignment: Alignment.centerLeft,
-              child: TitleWidget(),
+              child: TitleWidget(
+                onTap: () {
+                  tabController.animateTo(0);
+                },
+              ),
             ),
           ),
           const Padding(
